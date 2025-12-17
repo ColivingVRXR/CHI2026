@@ -13,83 +13,66 @@
 
   <style>
     :root{
-      --bg: #050816;
-      --panel: rgba(255,255,255,0.06);
-      --panel-2: rgba(255,255,255,0.08);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --muted-2:#94a3b8;
-      --accent: #38bdf8;
-      --accent-2:#a78bfa;
-      --ok:#34d399;
-      --warn:#fbbf24;
-      --danger:#fb7185;
-      --border: rgba(255,255,255,0.14);
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      /* Light, white-green palette */
+      --bg: #f4fbf6;
+      --bg-2:#ecf7f0;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted:#475569;
+      --muted-2:#334155;
+      --accent:#2f8f5b;     /* green */
+      --accent-2:#1b6b45;   /* deep green */
+      --border: rgba(15, 23, 42, 0.12);
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+      --shadow-sm: 0 10px 20px rgba(15, 23, 42, 0.08);
       --radius: 18px;
       --radius-sm: 12px;
-      --max: 1120px;
+      --max: 1160px;
     }
 
-    /* Base */
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: radial-gradient(1200px 700px at 15% 10%, rgba(56,189,248,.18), transparent 55%),
-                  radial-gradient(1000px 650px at 85% 0%, rgba(167,139,250,.14), transparent 55%),
-                  radial-gradient(900px 520px at 60% 95%, rgba(52,211,153,.10), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(47,143,91,.10), transparent 55%),
+        radial-gradient(900px 520px at 90% 10%, rgba(47,143,91,.08), transparent 55%),
+        radial-gradient(900px 520px at 60% 110%, rgba(47,143,91,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
       color:var(--text);
-      line-height:1.55;
+      line-height:1.65;
     }
+
     a{color:inherit; text-decoration:none}
-    a:hover{color:var(--accent)}
-    img{max-width:100%; height:auto}
+    a:hover{color:var(--accent-2)}
     p{margin:0 0 1rem}
-    h1,h2,h3{margin:0 0 .6rem; line-height:1.15}
-    h2{font-size: clamp(1.35rem, 2vw, 1.8rem)}
-    h3{font-size: 1.05rem}
-    .container{max-width:var(--max); margin:0 auto; padding: 0 20px}
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-    }
+    h1,h2,h3,h4{margin:0 0 .6rem; line-height:1.15}
+    h1{font-size: clamp(2.0rem, 3.2vw, 2.8rem)}
+    h2{font-size: clamp(1.45rem, 2.2vw, 1.9rem)}
+    h3{font-size: 1.12rem}
+    h4{font-size: 1.02rem}
+    .container{max-width:var(--max); margin:0 auto; padding: 0 22px}
+
     .skip{
       position:absolute; left:12px; top:12px;
-      padding:10px 12px; border:1px solid var(--border);
-      background:rgba(0,0,0,.55); border-radius:12px;
-      transform: translateY(-140%);
-    }
-    .skip:focus{transform:translateY(0); outline:none; box-shadow:0 0 0 3px rgba(56,189,248,.25)}
-    .pill{
-      display:inline-flex; align-items:center; gap:.5rem;
+      padding:10px 12px;
       border:1px solid var(--border);
-      background:rgba(0,0,0,.35);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: .9rem;
-      color: var(--muted-2);
+      background:rgba(255,255,255,.95);
+      border-radius:12px;
+      transform: translateY(-160%);
+      box-shadow: var(--shadow-sm);
     }
-    .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
-    .muted{color:var(--muted)}
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:.9em; padding:.18em .45em; border:1px solid var(--border);
-      border-bottom-color: rgba(255,255,255,0.22);
-      border-radius:8px; background:rgba(0,0,0,.28);
-      color:#cbd5e1;
-    }
+    .skip:focus{transform:translateY(0); outline:none; box-shadow:0 0 0 3px rgba(47,143,91,.25), var(--shadow-sm)}
 
     /* Header */
     header{
       position:sticky;
       top:0;
       z-index:100;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(5,8,22,.78), rgba(5,8,22,.40));
-      border-bottom:1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      background: rgba(244,251,246,.78);
+      border-bottom: 1px solid var(--border);
     }
     .nav{
       display:flex;
@@ -98,25 +81,21 @@
       gap:14px;
       padding: 14px 0;
     }
-    .brand{
-      display:flex; align-items:center; gap:12px; min-width: 220px;
-    }
+    .brand{display:flex; align-items:center; gap:12px}
     .logo{
       width:34px; height:34px; border-radius: 12px;
-      background: radial-gradient(circle at 30% 30%, rgba(56,189,248,.9), rgba(167,139,250,.65));
-      box-shadow: 0 10px 30px rgba(56,189,248,.18);
-      border:1px solid rgba(255,255,255,0.15);
+      background: radial-gradient(circle at 30% 30%, rgba(47,143,91,.95), rgba(27,107,69,.70));
+      box-shadow: 0 10px 24px rgba(47,143,91,.18);
+      border:1px solid rgba(15,23,42,0.10);
     }
-    .brand-title{
-      display:flex; flex-direction:column;
-      line-height:1.05;
-    }
+    .brand-title{display:flex; flex-direction:column; line-height:1.05}
     .brand-title b{font-size:.98rem}
     .brand-title span{font-size:.82rem; color:var(--muted)}
+
     nav ul{
       list-style:none;
       display:flex;
-      gap: 14px;
+      gap: 10px;
       padding:0; margin:0;
       flex-wrap:wrap;
       justify-content:flex-end;
@@ -125,61 +104,52 @@
       display:inline-flex;
       align-items:center;
       padding: 8px 10px;
-      border-radius: 10px;
+      border-radius: 999px;
       color: var(--muted-2);
+      border: 1px solid transparent;
     }
     nav a:hover{
-      background: rgba(255,255,255,0.06);
+      background: rgba(47,143,91,.08);
+      border-color: rgba(47,143,91,.18);
       color: var(--text);
     }
+    nav a[aria-current="page"]{
+      background: rgba(47,143,91,.12);
+      border-color: rgba(47,143,91,.28);
+      color: var(--accent-2);
+      font-weight: 800;
+    }
 
-    /* Hero */
-    .hero{
-      padding: 48px 0 24px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 22px;
-      align-items: stretch;
-    }
+    /* Layout */
+    main{padding: 26px 0 64px}
     .card{
       border:1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    .hero-main{
-      padding: 28px;
-      position:relative;
-      overflow:hidden;
+    .page{padding: 26px}
+
+    .prose{max-width: 86ch}
+    .spacer{height: 14px}
+
+    .hero{
+      padding: 0;
     }
-    .hero-main:before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(500px 240px at 12% 10%, rgba(56,189,248,.20), transparent 55%),
-        radial-gradient(520px 260px at 92% 0%, rgba(167,139,250,.18), transparent 55%),
-        radial-gradient(500px 220px at 65% 115%, rgba(52,211,153,.12), transparent 55%);
-      pointer-events:none;
-      filter: blur(0px);
+    .hero-inner{padding: 26px}
+
+    .pill{
+      display:inline-flex; align-items:center; gap:.5rem;
+      border:1px solid rgba(47,143,91,.22);
+      background: rgba(47,143,91,.07);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: .92rem;
+      color: var(--muted-2);
     }
-    .hero-content{position:relative}
-    .hero h1{
-      font-size: clamp(2.0rem, 4vw, 3.0rem);
-      letter-spacing: 0.01em;
-      margin-bottom: 10px;
-    }
-    .accent{color:var(--accent)}
-    .accent2{color:var(--accent-2)}
-    .hero p{max-width: 72ch; color:#cbd5e1}
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-      margin-top: 16px;
-    }
+    .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
+
+    .cta-row{display:flex; flex-wrap:wrap; gap: 10px; margin-top: 12px}
     .btn{
       display:inline-flex;
       align-items:center;
@@ -187,148 +157,134 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(15,23,42,0.14);
+      background: rgba(255,255,255,.92);
       color: var(--text);
       cursor:pointer;
       transition: transform .14s ease, background .14s ease;
-      font-weight: 600;
+      font-weight: 700;
+      box-shadow: var(--shadow-sm);
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,0.06)}
+    .btn:hover{transform: translateY(-1px); background: rgba(47,143,91,.06)}
     .btn.primary{
-      border-color: rgba(56,189,248,.38);
-      background: linear-gradient(180deg, rgba(56,189,248,.22), rgba(0,0,0,.25));
+      border-color: rgba(47,143,91,.32);
+      background: linear-gradient(180deg, rgba(47,143,91,.18), rgba(255,255,255,.95));
+      color: var(--accent-2);
     }
-    .btn small{font-weight:500; color: var(--muted); display:block; margin-top:2px}
-    .hero-aside{
-      padding: 20px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-    }
+
+    .grid-2{display:grid; grid-template-columns: 1fr 1fr; gap: 18px}
+    .grid-3{display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px}
+
     .kpi{
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,.25);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(47,143,91,.04);
       border-radius: var(--radius-sm);
       padding: 14px;
     }
     .kpi b{display:block; font-size:1.05rem}
     .kpi span{color:var(--muted); font-size:.95rem}
-    .notice{
-      border-left: 3px solid rgba(251,191,36,.85);
-      background: rgba(251,191,36,.08);
-      padding: 12px 12px 12px 14px;
-      border-radius: 12px;
-      color: #fde68a;
-    }
 
-    /* Sections */
-    main{padding: 18px 0 60px}
-    section{scroll-margin-top: 88px}
-    .section{
-      margin-top: 18px;
-      padding: 22px;
-    }
-    .section + .section{margin-top: 16px}
-    .grid-2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .grid-3{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 16px;
-    }
-    .list{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: #cbd5e1;
-    }
-    .list li{margin: .3rem 0}
     .callout{
-      border:1px dashed rgba(255,255,255,0.22);
-      background: rgba(0,0,0,.22);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(15,23,42,0.02);
       border-radius: var(--radius);
-      padding: 14px;
-      color: #cbd5e1;
+      padding: 16px;
+      color: var(--muted-2);
     }
     .placeholder{
-      border:1px dashed rgba(56,189,248,.40);
-      background: rgba(56,189,248,.08);
+      border:1px dashed rgba(47,143,91,.50);
+      background: rgba(47,143,91,.06);
       border-radius: var(--radius);
-      padding: 14px;
-      color: #bae6fd;
+      padding: 16px;
+      color: var(--accent-2);
     }
+
+    .list{margin: 10px 0 0; padding-left: 18px; color: var(--muted-2)}
+    .list li{margin: .35rem 0}
+
     .table{
       width:100%;
       border-collapse: collapse;
       overflow:hidden;
       border-radius: 14px;
-      border:1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,.18);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,.85);
     }
     .table th,.table td{
       padding: 10px 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      border-bottom: 1px solid rgba(15,23,42,0.10);
       vertical-align:top;
       text-align:left;
     }
-    .table th{color:#e2e8f0; font-weight:700; background: rgba(255,255,255,0.05)}
+    .table th{color: var(--text); font-weight:900; background: rgba(47,143,91,.06)}
     .table tr:last-child td{border-bottom:none}
-    .orgs{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 10px;
+
+    .crumbs{color: var(--muted); font-size: .95rem; margin-bottom: 10px}
+    .crumbs a{color: var(--accent-2)}
+    .crumbs a:hover{text-decoration: underline}
+
+    /* Program layout inspired by a clean “schedule table + details” flow */
+    .subhead{color: var(--muted); margin-top: -4px}
+    .schedule-wrap{margin-top: 14px}
+    .schedule-table td.time{white-space:nowrap; width: 130px; font-weight:800; color: var(--accent-2)}
+    .schedule-table td.event b{color: var(--text)}
+    .section-block{margin-top: 22px}
+    .section-block h3{margin-top: 0}
+    .section-block p{max-width: 86ch}
+
+    /* Images (placeholders) */
+    .img{
+      display:block;
+      width:100%;
+      border-radius: 16px;
+      border: 1px solid rgba(15,23,42,0.10);
+      box-shadow: var(--shadow-sm);
+      background: rgba(47,143,91,.04);
     }
+    .banner{aspect-ratio: 16 / 5; object-fit: cover}
+
+    .orgs{display:grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 12px}
     .org{
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,.22);
+      border:1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,.96);
       border-radius: 16px;
       padding: 14px;
+      box-shadow: var(--shadow-sm);
+      display:grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items:start;
     }
-    .org .name{font-weight:800}
+    .avatar{width:72px; height:72px; border-radius: 18px; object-fit: cover}
+    .org .name{font-weight:950}
     .org .affil{color:var(--muted); margin-top:4px; font-size:.95rem}
     .org .email{margin-top:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.92rem}
-    .org .bio{color:#cbd5e1; margin-top:10px; font-size:.96rem}
+    .org .bio{color:var(--muted-2); margin-top:10px; font-size:.96rem}
 
-    /* Footer */
     footer{
-      border-top: 1px solid rgba(255,255,255,0.10);
+      border-top: 1px solid rgba(15,23,42,0.12);
       padding: 22px 0 34px;
       color: var(--muted);
-      background: rgba(0,0,0,.18);
+      background: rgba(255,255,255,.55);
     }
-    .footer-grid{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap: 12px;
-      align-items:center;
-    }
+    .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap: 12px; align-items:center}
     .tiny{font-size:.92rem}
     .toplink{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border-radius:12px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(0,0,0,.18);
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 12px; border-radius:12px;
+      border: 1px solid rgba(15,23,42,0.12);
+      background: rgba(255,255,255,.85);
+      box-shadow: var(--shadow-sm);
     }
 
-    /* Responsive */
     @media (max-width: 920px){
-      .hero-grid{grid-template-columns: 1fr}
-      .brand{min-width: unset}
-      nav ul{justify-content:flex-start}
       .grid-3{grid-template-columns: 1fr}
       .grid-2{grid-template-columns: 1fr}
       .orgs{grid-template-columns: 1fr}
+      .org{grid-template-columns: 64px 1fr}
+      .avatar{width:64px; height:64px}
+      .schedule-table td.time{width: 110px}
     }
-
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
       .btn{transition:none}
@@ -338,12 +294,12 @@
 </head>
 
 <body>
-  <a class="skip" href="#content">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
   <header>
     <div class="container">
       <div class="nav">
-        <a class="brand" href="#top" aria-label="Workshop home">
+        <a class="brand" href="#/home" aria-label="Workshop home">
           <div class="logo" aria-hidden="true"></div>
           <div class="brand-title">
             <b>Co-Living: Reality ↔ Virtuality</b>
@@ -351,429 +307,29 @@
           </div>
         </a>
 
+        <!--
+          “Different pages” implemented as a small multi-page router using the URL hash.
+          This works on GitHub Pages with a single index.html, but feels like separate pages.
+          If you prefer real files later (cfp.html, program.html, etc.), we can split it easily.
+        -->
         <nav aria-label="Primary">
           <ul>
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#key-info">Key info</a></li>
-            <li><a href="#cfp">Call for participation</a></li>
-            <li><a href="#schedule">Activities</a></li>
-            <li><a href="#organizers">Organizers</a></li>
-            <li><a href="#accessibility">Accessibility</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a data-route href="#/home">Home</a></li>
+            <li><a data-route href="#/overview">Overview</a></li>
+            <li><a data-route href="#/key-info">Key info</a></li>
+            <li><a data-route href="#/cfp">CFP</a></li>
+            <li><a data-route href="#/program">Program</a></li>
+            <li><a data-route href="#/organizers">Organizers</a></li>
+            <li><a data-route href="#/accessibility">Accessibility</a></li>
+            <li><a data-route href="#/contact">Contact</a></li>
           </ul>
         </nav>
       </div>
     </div>
   </header>
 
-  <main id="content" class="container">
-    <div id="top" class="hero">
-      <div class="hero-grid">
-        <div class="card hero-main">
-          <div class="hero-content">
-            <div class="pill" style="margin-bottom:14px">
-              <span class="dot" aria-hidden="true"></span>
-              <span>In-person workshop • CHI 2026 • Barcelona, Spain</span>
-            </div>
-
-            <h1>
-              The <span class="accent">Co-Living</span> between
-              <span class="accent2">Reality</span> and <span class="accent2">Virtuality</span>
-              as a Daily Routine
-            </h1>
-
-            <p>
-              Mixed Reality (MR) is quickly becoming part of everyday life — from AI-powered XR wearables to
-              seamless transitions between physical and virtual environments. This workshop brings together
-              researchers, designers, and practitioners to explore <b>inclusive</b> onboarding and interaction
-              techniques for a future where moving across the reality–virtuality continuum becomes routine.
-            </p>
-
-            <div class="cta-row">
-              <!-- Replace # with your real links when available -->
-              <a class="btn primary" href="#cfp" aria-label="Jump to call for participation">
-                Participate <span aria-hidden="true">→</span>
-              </a>
-              <a class="btn" href="#" aria-label="Submission site (to be added)">
-                Submission site <span class="muted">(TBD)</span>
-              </a>
-              <a class="btn" href="https://chi2026.acm.org/" target="_blank" rel="noopener">
-                CHI 2026 site <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-
-            <p class="muted tiny" style="margin-top:12px">
-              Tip: If you’re editing this file, search for <span class="kbd">TBD</span> to find placeholder items quickly.
-            </p>
-          </div>
-        </div>
-
-        <aside class="card hero-aside" aria-label="At a glance">
-          <div class="kpi">
-            <b>When</b>
-            <span>During CHI 2026 (Apr 13–17, 2026) • Workshop day <b>TBD</b></span>
-          </div>
-          <div class="kpi">
-            <b>Format</b>
-            <span>Long workshop • 180 minutes (2×90 min sessions)</span>
-          </div>
-          <div class="kpi">
-            <b>Expected attendance</b>
-            <span>15–25 participants</span>
-          </div>
-          <div class="notice">
-            <b>Placeholders</b>
-            <div class="tiny" style="margin-top:6px">
-              Submission link, deadlines, and exact workshop date/time are currently marked as <b>TBD</b>.
-            </div>
-          </div>
-        </aside>
-      </div>
-    </div>
-
-    <!-- Overview -->
-    <section id="overview" class="card section">
-      <h2>Overview</h2>
-      <p>
-        We are approaching a moment where MR is poised to become a new standard of reality: users may switch between
-        full VR, passthrough MR, and the physical world as part of day-to-day routines. While many CHI attendees have
-        deep experience with immersive systems, broad adoption demands onboarding strategies that work for people with
-        diverse backgrounds — including generational differences, cultural contexts, disabilities, and neurodivergence.
-      </p>
-
-      <div class="grid-2">
-        <div class="callout">
-          <h3>Key questions</h3>
-          <ul class="list">
-            <li><b>Seamless transitions:</b> How can moving between reality and virtuality become intuitive and comfortable?</li>
-            <li><b>Inclusive onboarding:</b> What interaction patterns support first-time adopters and underrepresented groups?</li>
-            <li><b>Everyday MR:</b> How do we design for routines like commuting, healthcare, education, or home activities?</li>
-          </ul>
-        </div>
-
-        <div class="callout">
-          <h3>What to expect</h3>
-          <ul class="list">
-            <li>Short framing insights and guided discussion</li>
-            <li>Lightning presentations of accepted contributions</li>
-            <li>Poster/demo-style prototype sharing</li>
-            <li>Breakout group co-design and synthesis of principles</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key info -->
-    <section id="key-info" class="card section">
-      <h2>Key information</h2>
-
-      <table class="table" aria-label="Key information">
-        <tr>
-          <th>Conference</th>
-          <td>ACM CHI 2026</td>
-        </tr>
-        <tr>
-          <th>Location</th>
-          <td>Barcelona, Spain (in-person)</td>
-        </tr>
-        <tr>
-          <th>Conference dates</th>
-          <td>April 13–17, 2026</td>
-        </tr>
-        <tr>
-          <th>Workshop date &amp; time</th>
-          <td><span class="muted">TBD — will be updated when CHI workshop schedule is available.</span></td>
-        </tr>
-        <tr>
-          <th>Duration</th>
-          <td>Long workshop (two sessions) — 180 minutes total (2×90 minutes)</td>
-        </tr>
-        <tr>
-          <th>Proceedings plan</th>
-          <td>CEUR-WS (workshop proceedings) + Zenodo mirror (DOIs)</td>
-        </tr>
-      </table>
-
-      <div class="placeholder" style="margin-top:14px">
-        <b>Important dates (TBD)</b>
-        <div class="tiny" style="margin-top:6px">
-          Add submission deadline, notification date, camera-ready deadline, and any pre-workshop onboarding session(s).
-        </div>
-      </div>
-    </section>
-
-    <!-- CFP -->
-    <section id="cfp" class="card section">
-      <h2>Call for participation</h2>
-      <p>
-        This workshop explores how MR is becoming embedded in everyday routines and asks how we can design seamless,
-        inclusive, and meaningful transitions between the physical and the virtual.
-      </p>
-
-      <div class="grid-2">
-        <div>
-          <h3>Topics of interest</h3>
-          <ul class="list">
-            <li><b>Seamless transitions:</b> metaphors, interface concepts, and technical solutions across VR/MR/physical contexts</li>
-            <li><b>Onboarding &amp; accessibility:</b> inclusive interaction patterns across culture, disabilities, and differing tech experience</li>
-            <li><b>Embodied everyday interaction:</b> cooking, commuting, healthcare, education, work</li>
-            <li><b>Speculative &amp; critical perspectives:</b> ethics, opting in/out, continuous recording and privacy</li>
-            <li><b>Prototypes &amp; demonstrations:</b> systems, mock-ups, artworks, and future scenarios</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3>Submission types</h3>
-          <ul class="list">
-            <li><b>Short papers:</b> up to 6 pages</li>
-            <li><b>Position papers:</b> 2–4 pages</li>
-            <li><b>Poster/demo abstracts:</b> 1 page</li>
-          </ul>
-
-          <div class="placeholder" style="margin-top:12px">
-            <b>Submission instructions (TBD)</b>
-            <div class="tiny" style="margin-top:6px">
-              Add: formatting requirements, anonymization policy, submission platform link, and review criteria.
-            </div>
-          </div>
-
-          <p class="muted tiny" style="margin-top:10px">
-            Participation note: At least one author of each accepted submission must register and attend the workshop.
-          </p>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:14px">
-        <h3>Publication &amp; sharing</h3>
-        <ul class="list">
-          <li>Accepted papers/posters/demos will be collected into proceedings (planned: CEUR-WS).</li>
-          <li>Materials (slides, photos of prototypes, summaries) will be hosted on this website after the workshop.</li>
-          <li>A mirror archive will be created on Zenodo to ensure long-term access and DOI-based citation.</li>
-          <li>Organizers plan a post-workshop report for broader dissemination (e.g., SIGCHI channels).</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Schedule / Activities -->
-    <section id="schedule" class="card section">
-      <h2>Workshop activities</h2>
-      <p class="muted">Planned 180 minutes total (two 90-minute sessions). Times may be adapted to the final CHI schedule.</p>
-
-      <table class="table" aria-label="Planned activities">
-        <tr>
-          <th>Segment</th>
-          <th>Duration</th>
-          <th>Description</th>
-        </tr>
-        <tr>
-          <td><b>1. Opening &amp; scene setting</b></td>
-          <td>15 min</td>
-          <td>Framing XR as everyday tech; guiding questions on seamless transitions and inclusiveness.</td>
-        </tr>
-        <tr>
-          <td><b>2. Paper presentations</b></td>
-          <td>50 min</td>
-          <td>Accepted papers/position papers presented (5–7 minutes each) to seed discussion.</td>
-        </tr>
-        <tr>
-          <td><b>3. Debate &amp; critical reflections</b></td>
-          <td>25 min</td>
-          <td>Moderated discussion on ethics, privacy, and whether disengagement should remain an option.</td>
-        </tr>
-        <tr>
-          <td><b>— Break —</b></td>
-          <td>15 min</td>
-          <td>Reset and informal discussion.</td>
-        </tr>
-        <tr>
-          <td><b>4. Prototype demos &amp; posters</b></td>
-          <td>20 min</td>
-          <td>Interactive sharing of demos/posters (e.g., carrying virtual objects across transitions, scalable text overlays).</td>
-        </tr>
-        <tr>
-          <td><b>5. Breakout groups &amp; co-design</b></td>
-          <td>40 min</td>
-          <td>Small-group sketching/prototyping focused on inclusiveness, everyday usability, and ethics.</td>
-        </tr>
-        <tr>
-          <td><b>6. Sharing &amp; synthesis</b></td>
-          <td>20 min</td>
-          <td>Groups present; extraction of design principles and open research challenges.</td>
-        </tr>
-        <tr>
-          <td><b>7. Wrap-up &amp; next steps</b></td>
-          <td>10 min</td>
-          <td>Outline publication plans, collaboration channels, and post-workshop archival.</td>
-        </tr>
-      </table>
-
-      <div class="placeholder" style="margin-top:14px">
-        <b>Optional additions (TBD)</b>
-        <div class="tiny" style="margin-top:6px">
-          Add: keynote speaker info, pre-workshop onboarding session, demo equipment requirements, or hybrid elements (if any).
-        </div>
-      </div>
-    </section>
-
-    <!-- Organizers -->
-    <section id="organizers" class="card section">
-      <h2>Organizers</h2>
-      <p class="muted">Bios below are based on the workshop proposal and can be shortened/updated for the website.</p>
-
-      <div class="orgs" role="list">
-        <div class="org" role="listitem">
-          <div class="name">Georgios Tsampounaris</div>
-          <div class="affil">Event Lab, University of Barcelona, Spain</div>
-          <div class="email"><a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a></div>
-          <div class="bio">
-            XR developer and visual artist working across AR/VR, immersive VFX, real-time visuals, and creative tooling.
-            Experience spans academia and creative industry; founder of 70% Water immersive studio.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Alex Fuentes-Raventós</div>
-          <div class="affil">Computer Vision Center (UAB) &amp; Event Lab, University of Barcelona, Spain</div>
-          <div class="email"><a href="mailto:alex.fuentes@autonoma.cat">alex.fuentes@autonoma.cat</a></div>
-          <div class="bio">
-            PhD student and research technician bridging AI and neuroscience to study how VR/MR can influence behavior.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Michael Wiesing</div>
-          <div class="affil">Event Lab, University of Barcelona, Spain</div>
-          <div class="email"><a href="mailto:m.wiesing@ub.edu">m.wiesing@ub.edu</a></div>
-          <div class="bio">
-            Postdoctoral researcher focused on presence and co-presence in VR; develops Unity-based experiments and open tooling,
-            co-organizes the annual VR Summit and Hackathon.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Roger Montserrat-Jovellar</div>
-          <div class="affil">Event Lab, University of Barcelona, Spain</div>
-          <div class="email"><a href="mailto:rogermontserrat@ub.edu">rogermontserrat@ub.edu</a></div>
-          <div class="bio">
-            General health psychologist and PhD student exploring VR and AI for clinical psychology training and therapy contexts.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Kris Pilcher</div>
-          <div class="affil">Spatial Sound Lab, MIT, USA</div>
-          <div class="email"><a href="mailto:kpilcher@mit.edu">kpilcher@mit.edu</a></div>
-          <div class="bio">
-            Creative technologist researching AI, performance, and sensory design; projects presented at CHI, Ars Electronica, VRHAM,
-            CCCB Barcelona, and Cannes XR.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Katerina El Raheb</div>
-          <div class="affil">University of the Peloponnese, Greece</div>
-          <div class="email"><a href="mailto:k.elraheb@go.uop.gr">k.elraheb@go.uop.gr</a></div>
-          <div class="bio">
-            Assistant Professor in Performing &amp; Digital Arts; HCI researcher in cultural heritage, artistic creation, and education;
-            trained dancer integrating embodied practice with interactive systems.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Art Pilacinski</div>
-          <div class="affil">Ruhr University Bochum, Germany</div>
-          <div class="email"><a href="mailto:artur.pilacinski@rub.de">artur.pilacinski@rub.de</a></div>
-          <div class="bio">
-            Researcher in sensorimotor cognition and neurotechnology; explores topics including phantom touch in VR and intuitive
-            biomechanics; runs the VR Summit conference.
-          </div>
-        </div>
-
-        <div class="org" role="listitem">
-          <div class="name">Mel Slater</div>
-          <div class="affil">University of Barcelona, Spain</div>
-          <div class="email"><a href="mailto:melslater@ub.edu">melslater@ub.edu</a></div>
-          <div class="bio">
-            Distinguished Investigator and co-Director of Event Lab; long-standing VR researcher focusing on presence and body ownership,
-            bridging technical development with cognitive neuroscience.
-          </div>
-        </div>
-      </div>
-
-      <div class="placeholder" style="margin-top:14px">
-        <b>Organizer photos (TBD)</b>
-        <div class="tiny" style="margin-top:6px">
-          Add headshots and optional personal homepage links. (Current layout is text-only.)
-        </div>
-      </div>
-    </section>
-
-    <!-- Accessibility -->
-    <section id="accessibility" class="card section">
-      <h2>Accessibility</h2>
-      <p>
-        We are committed to making the workshop accessible and inclusive. Plans include ensuring wheelchair-accessible space,
-        flexible seating, accessible materials in advance (embedded-text PDFs), multimodal instructions (spoken and written),
-        and inclusive facilitation that supports varied participation formats.
-      </p>
-
-      <div class="grid-2">
-        <div class="callout">
-          <h3>At the venue</h3>
-          <ul class="list">
-            <li>Wheelchair accessible room and flexible seating arrangements</li>
-            <li>Activities designed to avoid excessive standing or movement</li>
-            <li>Facilitation to ensure all voices are included</li>
-          </ul>
-        </div>
-        <div class="callout">
-          <h3>Materials &amp; sensory considerations</h3>
-          <ul class="list">
-            <li>Accessible PDFs with embedded text</li>
-            <li>Posters accompanied by short text summaries; demos include captions/alt-text</li>
-            <li>Instructions given both verbally and in writing</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="placeholder" style="margin-top:14px">
-        <b>Accessibility requests (TBD)</b>
-        <div class="tiny" style="margin-top:6px">
-          Add: a contact email + a short form or instruction for participants to share accommodation needs ahead of time.
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="card section">
-      <h2>Contact</h2>
-      <div class="grid-2">
-        <div>
-          <p>
-            For questions about participation, submissions, or accessibility, contact:
-          </p>
-          <div class="callout">
-            <b>Workshop organizers</b>
-            <div class="tiny" style="margin-top:6px">
-              <a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a> (primary contact) — <span class="muted">or update with a shared workshop mailbox (TBD).</span>
-            </div>
-          </div>
-
-          <p class="muted tiny" style="margin-top:12px">
-            If you maintain a public repository, you can also link an issue tracker here for questions and announcements.
-          </p>
-        </div>
-
-        <div>
-          <div class="placeholder">
-            <b>Mailing list / social links (TBD)</b>
-            <div class="tiny" style="margin-top:6px">
-              Add: mailing list signup, Discord/Slack, or social handles, plus a short code of conduct statement if desired.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <main id="main" class="container">
+    <div id="app" class="card page" role="document" aria-live="polite"></div>
   </main>
 
   <footer>
@@ -781,15 +337,506 @@
       <div class="footer-grid">
         <div class="tiny">
           © <span id="year"></span> Workshop organizers •
-          <span class="muted">This site is a lightweight static page intended for GitHub Pages.</span>
+          <span class="muted">Static site (single file) — easy to host on GitHub Pages.</span>
         </div>
-        <a class="toplink" href="#top" aria-label="Back to top">Back to top <span aria-hidden="true">↑</span></a>
+        <a class="toplink" href="#/home" aria-label="Back to home">Back to home <span aria-hidden="true">↩</span></a>
       </div>
     </div>
 
     <script>
-      // Update year in footer (safe in static hosting)
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      const $app = document.getElementById('app');
+
+      function crumbs(label){
+        return `<div class="crumbs"><a href="#/home">Home</a> / <span>${label}</span></div>`;
+      }
+
+      function esc(s){
+        return String(s)
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      // Single SVG placeholder “image” used everywhere we’d normally add photos/figures.
+      function svgPlaceholder({ title='Image', subtitle='TBD', w=1200, h=600 } = {}){
+        const svg = `\
+<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f8f5b" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#1b6b45" stop-opacity="0.18"/>
+    </linearGradient>
+    <pattern id="p" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M0 32 L32 0" stroke="#1b6b45" stroke-opacity="0.10" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect x="0" y="0" width="${w}" height="${h}" fill="#ffffff"/>
+  <rect x="0" y="0" width="${w}" height="${h}" fill="url(#g)"/>
+  <rect x="0" y="0" width="${w}" height="${h}" fill="url(#p)" opacity=".85"/>
+
+  <rect x="24" y="24" width="${w-48}" height="${h-48}" rx="28" ry="28" fill="rgba(255,255,255,0.75)" stroke="rgba(15,23,42,0.14)"/>
+
+  <g fill="#0f172a" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial">
+    <text x="64" y="120" font-size="38" font-weight="800">${esc(title)}</text>
+    <text x="64" y="170" font-size="20" fill="#475569">${esc(subtitle)}</text>
+  </g>
+
+  <g transform="translate(${w-220}, ${h-210})" opacity=".9">
+    <rect x="0" y="0" width="156" height="156" rx="24" fill="rgba(47,143,91,0.10)" stroke="rgba(15,23,42,0.14)"/>
+    <path d="M32 112 L70 74 L92 96 L126 60" fill="none" stroke="#1b6b45" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="56" cy="56" r="16" fill="rgba(47,143,91,0.25)" stroke="#1b6b45" stroke-width="4"/>
+  </g>
+</svg>`;
+        return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+      }
+
+      function hydrateImages(){
+        document.querySelectorAll('img[data-placeholder]').forEach(img => {
+          const kind = img.getAttribute('data-placeholder');
+          const title = img.getAttribute('data-title') || (kind === 'avatar' ? 'Organizer photo' : 'Workshop image');
+          const subtitle = img.getAttribute('data-subtitle') || (kind === 'avatar' ? (img.getAttribute('data-name') || 'TBD') : 'Replace with final image');
+          const w = kind === 'avatar' ? 400 : 1400;
+          const h = kind === 'avatar' ? 400 : 720;
+          img.src = svgPlaceholder({ title, subtitle, w, h });
+        });
+      }
+
+      const pages = {
+        home: {
+          title: 'Home',
+          render: () => `
+            <div class="hero">
+              <img class="img banner" data-placeholder="banner" data-title="Workshop hero image" data-subtitle="Add a visual (MR / reality–virtuality continuum)" alt="Workshop hero placeholder image" />
+              <div class="hero-inner">
+                <div class="pill" style="margin-bottom:12px"><span class="dot" aria-hidden="true"></span><span>In-person workshop • CHI 2026 • Barcelona, Spain</span></div>
+
+                <h1>The Co-Living between <span style="color:var(--accent-2)">Reality</span> and <span style="color:var(--accent-2)">Virtuality</span> as a Daily Routine</h1>
+
+                <p class="prose" style="color:var(--muted-2)">
+                  Mixed Reality (MR) is quickly becoming part of everyday life — from AI-powered XR wearables to seamless transitions between physical and virtual environments.
+                  This workshop brings together researchers, designers, and practitioners to explore <b>inclusive</b> onboarding and interaction techniques for a future where moving across the reality–virtuality continuum becomes routine.
+                </p>
+
+                <div class="cta-row">
+                  <a class="btn primary" href="#/cfp">Participate <span aria-hidden="true">→</span></a>
+                  <a class="btn" href="#" onclick="return false" aria-label="Submission site (to be added)">Submission site <span style="color:var(--muted)">(TBD)</span></a>
+                  <a class="btn" href="https://chi2026.acm.org/" target="_blank" rel="noopener">CHI 2026 site <span aria-hidden="true">↗</span></a>
+                </div>
+
+                <div class="grid-3" style="margin-top:18px">
+                  <div class="kpi"><b>When</b><span>During CHI 2026 (Apr 13–17, 2026) • Workshop day <b>TBD</b></span></div>
+                  <div class="kpi"><b>Format</b><span>Long workshop • 180 minutes (2×90 min sessions)</span></div>
+                  <div class="kpi"><b>Expected attendance</b><span>15–25 participants</span></div>
+                </div>
+
+                <div class="placeholder" style="margin-top:18px">
+                  <b>Placeholders</b>
+                  <div class="tiny" style="margin-top:6px">
+                    Deadlines, submission link, and the exact workshop date/time are marked as <b>TBD</b> and ready to replace.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="spacer"></div>
+
+            <div class="grid-2">
+              <div class="callout">
+                <h3>Start here</h3>
+                <ul class="list">
+                  <li><a href="#/overview"><b>Overview</b></a>: context, motivation, and key questions</li>
+                  <li><a href="#/cfp"><b>Call for participation</b></a>: topics + submission types</li>
+                  <li><a href="#/program"><b>Program</b></a>: schedule + activity descriptions</li>
+                </ul>
+              </div>
+              <div class="callout">
+                <h3>Quick links</h3>
+                <ul class="list">
+                  <li><a href="#/organizers"><b>Organizers</b></a> and contact info</li>
+                  <li><a href="#/accessibility"><b>Accessibility</b></a> commitments and requests</li>
+                  <li><a href="#/key-info"><b>Key info</b></a> (location, dates, proceedings plan)</li>
+                </ul>
+              </div>
+            </div>
+          `
+        },
+
+        overview: {
+          title: 'Overview',
+          render: () => `
+            ${crumbs('Overview')}
+            <h1>Overview</h1>
+            <p class="prose">
+              We are approaching a moment where MR is poised to become a new standard of reality: users may switch between full VR,
+              passthrough MR, and the physical world as part of day-to-day routines. Broad adoption demands onboarding strategies that work for people with diverse backgrounds — including generational differences, cultural contexts, disabilities, and neurodivergence.
+            </p>
+
+            <div class="grid-2" style="margin-top:16px">
+              <div class="callout">
+                <h3>Key questions</h3>
+                <ul class="list">
+                  <li><b>Seamless transitions:</b> How can moving between reality and virtuality become intuitive and comfortable?</li>
+                  <li><b>Inclusive onboarding:</b> What interaction patterns support first-time adopters and underrepresented groups?</li>
+                  <li><b>Everyday MR:</b> How do we design for routines like commuting, healthcare, education, or home activities?</li>
+                </ul>
+              </div>
+              <div class="callout">
+                <h3>What to expect</h3>
+                <ul class="list">
+                  <li>Short framing insights and guided discussion</li>
+                  <li>Lightning presentations of accepted contributions</li>
+                  <li>Poster/demo-style prototype sharing</li>
+                  <li>Breakout group co-design and synthesis of principles</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <h2>Why now</h2>
+              <p class="prose" style="color:var(--muted-2)">
+                As MR becomes more socially visible and physically embedded (e.g., wearables, shared spaces, public deployments), designers will need patterns for transitions that are safe, comprehensible, and culturally sensitive — not just "cool".
+              </p>
+              <div class="placeholder">
+                <b>Optional figure (TBD)</b>
+                <div class="tiny" style="margin-top:6px">Add a diagram of the reality–virtuality continuum, or a simple workflow of daily switching.</div>
+              </div>
+            </div>
+          `
+        },
+
+        'key-info': {
+          title: 'Key information',
+          render: () => `
+            ${crumbs('Key info')}
+            <h1>Key information</h1>
+            <table class="table" aria-label="Key information" style="margin-top:12px">
+              <tr><th>Conference</th><td>ACM CHI 2026</td></tr>
+              <tr><th>Location</th><td>Barcelona, Spain (in-person)</td></tr>
+              <tr><th>Conference dates</th><td>April 13–17, 2026</td></tr>
+              <tr><th>Workshop date &amp; time</th><td><span style="color:var(--muted)">TBD — will be updated when CHI workshop schedule is available.</span></td></tr>
+              <tr><th>Duration</th><td>Long workshop (two sessions) — 180 minutes total (2×90 minutes)</td></tr>
+              <tr><th>Proceedings plan</th><td>CEUR-WS (workshop proceedings) + Zenodo mirror (DOIs)</td></tr>
+            </table>
+
+            <div class="placeholder" style="margin-top:14px">
+              <b>Important dates (TBD)</b>
+              <div class="tiny" style="margin-top:6px">
+                Add submission deadline, notification date, camera-ready deadline, and any pre-workshop onboarding session(s).
+              </div>
+            </div>
+          `
+        },
+
+        cfp: {
+          title: 'Call for participation',
+          render: () => `
+            ${crumbs('CFP')}
+            <h1>Call for participation</h1>
+            <p class="prose">
+              This workshop explores how MR is becoming embedded in everyday routines and asks how we can design seamless, inclusive,
+              and meaningful transitions between the physical and the virtual.
+            </p>
+
+            <div class="grid-2" style="margin-top:16px">
+              <div>
+                <h2>Topics of interest</h2>
+                <ul class="list">
+                  <li><b>Seamless transitions:</b> metaphors, interface concepts, and technical solutions across VR/MR/physical contexts</li>
+                  <li><b>Onboarding &amp; accessibility:</b> inclusive interaction patterns across culture, disabilities, and differing tech experience</li>
+                  <li><b>Embodied everyday interaction:</b> cooking, commuting, healthcare, education, work</li>
+                  <li><b>Speculative &amp; critical perspectives:</b> ethics, opting in/out, continuous recording and privacy</li>
+                  <li><b>Prototypes &amp; demonstrations:</b> systems, mock-ups, artworks, and future scenarios</li>
+                </ul>
+              </div>
+
+              <div>
+                <h2>Submission types</h2>
+                <ul class="list">
+                  <li><b>Short papers:</b> up to 6 pages</li>
+                  <li><b>Position papers:</b> 2–4 pages</li>
+                  <li><b>Poster/demo abstracts:</b> 1 page</li>
+                </ul>
+
+                <div class="placeholder" style="margin-top:12px">
+                  <b>Submission instructions (TBD)</b>
+                  <div class="tiny" style="margin-top:6px">
+                    Add: formatting requirements, anonymization policy, submission platform link, and review criteria.
+                  </div>
+                </div>
+
+                <p class="tiny" style="margin-top:10px; color:var(--muted)">
+                  Participation note: At least one author of each accepted submission must register and attend the workshop.
+                </p>
+              </div>
+            </div>
+
+            <div class="section-block callout">
+              <h2>Publication &amp; sharing</h2>
+              <ul class="list">
+                <li>Accepted papers/posters/demos will be collected into proceedings (planned: CEUR-WS).</li>
+                <li>Materials (slides, photos of prototypes, summaries) will be hosted on this website after the workshop.</li>
+                <li>A mirror archive will be created on Zenodo to ensure long-term access and DOI-based citation.</li>
+                <li>Organizers plan a post-workshop report for broader dissemination (e.g., SIGCHI channels).</li>
+              </ul>
+            </div>
+          `
+        },
+
+        program: {
+          title: 'Program',
+          render: () => `
+            ${crumbs('Program')}
+            <h1>Program</h1>
+            <p class="subhead">CHI 2026 Workshop • Barcelona, Spain • <b>Date: TBD</b></p>
+
+            <div class="schedule-wrap">
+              <h2 style="margin-top:16px">Workshop schedule</h2>
+              <p class="prose" style="color:var(--muted)">
+                Below is a draft agenda (two 90-minute sessions; 180 minutes total). Replace the <b>TBD</b> times once the CHI schedule is published.
+              </p>
+
+              <table class="table schedule-table" aria-label="Workshop schedule" style="margin-top:12px">
+                <tr><th style="width:130px">Time</th><th>Event</th></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Introduction &amp; scene setting</b></td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Paper presentations</b> (lightning format)</td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Debate &amp; critical reflections</b></td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Break</b></td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Prototype demos &amp; posters</b></td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Breakout groups &amp; co-design</b></td></tr>
+                <tr><td class="time">TBD</td><td class="event"><b>Sharing, synthesis &amp; wrap-up</b></td></tr>
+              </table>
+
+              <div class="placeholder" style="margin-top:14px">
+                <b>Room / equipment (TBD)</b>
+                <div class="tiny" style="margin-top:6px">Add room number, poster boards, power outlets, and demo constraints.</div>
+              </div>
+            </div>
+
+            <div class="section-block">
+              <h2>Activity details</h2>
+
+              <div class="section-block">
+                <h3>Introduction &amp; scene setting</h3>
+                <p class="prose">We start with goals, key research questions, and a shared framing of XR as everyday technology across the reality–virtuality continuum.</p>
+              </div>
+
+              <div class="section-block">
+                <h3>Paper presentations</h3>
+                <p class="prose">Short presentations (5–7 minutes each) of accepted contributions to seed discussion, establish shared vocabulary, and surface tensions.</p>
+              </div>
+
+              <div class="section-block">
+                <h3>Debate &amp; critical reflections</h3>
+                <p class="prose">A moderated discussion on ethics and trade-offs: privacy, continuous recording, opting in/out, and how inclusiveness changes what “seamless” should mean.</p>
+              </div>
+
+              <div class="section-block">
+                <h3>Prototype demos &amp; posters</h3>
+                <p class="prose">Hands-on sharing of prototypes and demo concepts (e.g., carrying virtual objects across transitions, scalable overlays, assistive MR interaction patterns).</p>
+              </div>
+
+              <div class="section-block">
+                <h3>Breakout groups &amp; co-design</h3>
+                <p class="prose">Small groups co-design solutions and principles around everyday usability, onboarding, accessibility, and cultural/ethical considerations.</p>
+              </div>
+
+              <div class="section-block">
+                <h3>Sharing, synthesis &amp; wrap-up</h3>
+                <p class="prose">Groups report back; we synthesize design principles and open research challenges, and align on post-workshop outcomes and publishing.</p>
+              </div>
+
+              <div class="section-block">
+                <h2>Post-workshop (planned)</h2>
+                <ul class="list">
+                  <li>Proceedings (CEUR-WS) and a Zenodo mirror with DOI-based citation</li>
+                  <li>Website update with accepted materials, photos, and a short synthesis report</li>
+                  <li>Community follow-up space (TBD: Discord/Slack) for continued collaboration</li>
+                </ul>
+              </div>
+            </div>
+          `
+        },
+
+        organizers: {
+          title: 'Organizers',
+          render: () => `
+            ${crumbs('Organizers')}
+            <h1>Organizers</h1>
+            <p class="subhead">(Images below are placeholders — replace with headshots.)</p>
+
+            <div class="orgs" role="list">
+              ${organizerCard({
+                name:'Georgios Tsampounaris',
+                affil:'Event Lab, University of Barcelona, Spain',
+                email:'tsampounaris@ub.edu',
+                bio:'XR developer and visual artist working across AR/VR, immersive VFX, real-time visuals, and creative tooling. Experience spans academia and creative industry; founder of 70% Water immersive studio.'
+              })}
+              ${organizerCard({
+                name:'Alex Fuentes-Raventós',
+                affil:'Computer Vision Center (UAB) & Event Lab, University of Barcelona, Spain',
+                email:'alex.fuentes@autonoma.cat',
+                bio:'PhD student and research technician bridging AI and neuroscience to study how VR/MR can influence behavior.'
+              })}
+              ${organizerCard({
+                name:'Michael Wiesing',
+                affil:'Event Lab, University of Barcelona, Spain',
+                email:'m.wiesing@ub.edu',
+                bio:'Postdoctoral researcher focused on presence and co-presence in VR; develops Unity-based experiments and open tooling; co-organizes the annual VR Summit and Hackathon.'
+              })}
+              ${organizerCard({
+                name:'Roger Montserrat-Jovellar',
+                affil:'Event Lab, University of Barcelona, Spain',
+                email:'rogermontserrat@ub.edu',
+                bio:'General health psychologist and PhD student exploring VR and AI for clinical psychology training and therapy contexts.'
+              })}
+              ${organizerCard({
+                name:'Kris Pilcher',
+                affil:'Spatial Sound Lab, MIT, USA',
+                email:'kpilcher@mit.edu',
+                bio:'Creative technologist researching AI, performance, and sensory design; projects presented at CHI, Ars Electronica, VRHAM, CCCB Barcelona, and Cannes XR.'
+              })}
+              ${organizerCard({
+                name:'Katerina El Raheb',
+                affil:'University of the Peloponnese, Greece',
+                email:'k.elraheb@go.uop.gr',
+                bio:'Assistant Professor in Performing & Digital Arts; HCI researcher in cultural heritage, artistic creation, and education; trained dancer integrating embodied practice with interactive systems.'
+              })}
+              ${organizerCard({
+                name:'Art Pilacinski',
+                affil:'Ruhr University Bochum, Germany',
+                email:'artur.pilacinski@rub.de',
+                bio:'Researcher in sensorimotor cognition and neurotechnology; explores topics including phantom touch in VR and intuitive biomechanics; runs the VR Summit conference.'
+              })}
+              ${organizerCard({
+                name:'Mel Slater',
+                affil:'University of Barcelona, Spain',
+                email:'melslater@ub.edu',
+                bio:'Distinguished Investigator and co-Director of Event Lab; long-standing VR researcher focusing on presence and body ownership, bridging technical development with cognitive neuroscience.'
+              })}
+            </div>
+
+            <div class="placeholder" style="margin-top:16px">
+              <b>Links (TBD)</b>
+              <div class="tiny" style="margin-top:6px">Optionally add each organizer’s homepage / Google Scholar / ORCID.</div>
+            </div>
+          `
+        },
+
+        accessibility: {
+          title: 'Accessibility',
+          render: () => `
+            ${crumbs('Accessibility')}
+            <h1>Accessibility</h1>
+            <p class="prose">
+              We are committed to making the workshop accessible and inclusive. Plans include ensuring wheelchair-accessible space,
+              flexible seating, accessible materials in advance (embedded-text PDFs), multimodal instructions (spoken and written),
+              and inclusive facilitation that supports varied participation formats.
+            </p>
+
+            <div class="grid-2" style="margin-top:16px">
+              <div class="callout">
+                <h2>At the venue</h2>
+                <ul class="list">
+                  <li>Wheelchair accessible room and flexible seating arrangements</li>
+                  <li>Activities designed to avoid excessive standing or movement</li>
+                  <li>Facilitation to ensure all voices are included</li>
+                </ul>
+              </div>
+              <div class="callout">
+                <h2>Materials &amp; sensory considerations</h2>
+                <ul class="list">
+                  <li>Accessible PDFs with embedded text</li>
+                  <li>Posters accompanied by short text summaries; demos include captions/alt-text</li>
+                  <li>Instructions given both verbally and in writing</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="placeholder" style="margin-top:16px">
+              <b>Accessibility requests (TBD)</b>
+              <div class="tiny" style="margin-top:6px">Add a contact email + instructions for participants to share accommodation needs ahead of time.</div>
+            </div>
+          `
+        },
+
+        contact: {
+          title: 'Contact',
+          render: () => `
+            ${crumbs('Contact')}
+            <h1>Contact</h1>
+            <div class="grid-2" style="margin-top:14px">
+              <div>
+                <p class="prose">For questions about participation, submissions, or accessibility, contact:</p>
+                <div class="callout">
+                  <b>Workshop organizers</b>
+                  <div class="tiny" style="margin-top:6px">
+                    <a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a> (primary contact) —
+                    <span style="color:var(--muted)">or update with a shared workshop mailbox (TBD).</span>
+                  </div>
+                </div>
+
+                <p class="tiny" style="margin-top:12px; color:var(--muted)">
+                  If you maintain a public repository, you can also link an issue tracker here for questions and announcements.
+                </p>
+              </div>
+
+              <div>
+                <div class="placeholder">
+                  <b>Mailing list / social links (TBD)</b>
+                  <div class="tiny" style="margin-top:6px">Add: mailing list signup, Discord/Slack, or social handles, plus a short code of conduct statement if desired.</div>
+                </div>
+              </div>
+            </div>
+          `
+        }
+      };
+
+      function organizerCard({ name, affil, email, bio }){
+        const safeName = esc(name);
+        return `
+          <div class="org" role="listitem">
+            <img class="img avatar" data-placeholder="avatar" data-title="Organizer photo" data-name="${safeName}" data-subtitle="${safeName}" alt="Organizer placeholder photo for ${safeName}" />
+            <div>
+              <div class="name">${safeName}</div>
+              <div class="affil">${esc(affil)}</div>
+              <div class="email"><a href="mailto:${esc(email)}">${esc(email)}</a></div>
+              <div class="bio">${esc(bio)}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      function normalizeRoute(hash){
+        const raw = (hash || '').replace(/^#\/?/, '');
+        return raw || 'home';
+      }
+
+      function render(){
+        const route = normalizeRoute(location.hash);
+        const page = pages[route] || pages.home;
+
+        document.title = `Co-Living Reality ↔ Virtuality — ${page.title}`;
+        $app.innerHTML = page.render();
+
+        // Update nav active state
+        document.querySelectorAll('a[data-route]').forEach(a => {
+          const isActive = normalizeRoute(a.getAttribute('href')) === route;
+          if (isActive) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
+        });
+
+        hydrateImages();
+
+        // Ensure top of content is visible when switching pages
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+
+      window.addEventListener('hashchange', render);
+      render();
     </script>
   </footer>
 </body>
