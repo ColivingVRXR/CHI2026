@@ -358,7 +358,7 @@
       }
 
       // Single SVG placeholder “image” used everywhere we’d normally add photos/figures.
-      function svgPlaceholder({ title='Image', subtitle='TBD', w=1200, h=600 } = {}){
+      function svgPlaceholder({ title='Image', subtitle='Replace with final image', w=1200, h=600 } = {}){
         const svg = `\
 <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
   <defs>
@@ -402,7 +402,7 @@
               img.removeAttribute('data-src');
               // Fall back to the generated placeholder
               const title = img.getAttribute('data-title') || (kind === 'avatar' ? 'Organizer photo' : 'Workshop image');
-              const subtitle = img.getAttribute('data-subtitle') || (kind === 'avatar' ? (img.getAttribute('data-name') || 'TBD') : 'Replace with final image');
+              const subtitle = img.getAttribute('data-subtitle') || (kind === 'avatar' ? (img.getAttribute('data-name') || 'Organizer') : 'Replace with final image');
               const w = kind === 'avatar' ? 400 : 1400;
               const h = kind === 'avatar' ? 400 : 720;
               img.src = svgPlaceholder({ title, subtitle, w, h });
@@ -437,7 +437,7 @@
 
                 <div class="cta-row">
                   <a class="btn primary" href="#/cfp">Participate <span aria-hidden="true">→</span></a>
-                  <a class="btn" href="#" onclick="return false" aria-label="Submission site (to be added)">Submission site <span style="color:var(--muted)">(TBD)</span></a>
+                  <a class="btn" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submission form <span aria-hidden="true">↗</span></a>
                   <a class="btn" href="https://chi2026.acm.org/" target="_blank" rel="noopener">CHI 2026 site <span aria-hidden="true">↗</span></a>
                 </div>
 
@@ -446,13 +446,7 @@
                   <div class="kpi"><b>Format</b><span>Long workshop • 180 minutes (2×90 min sessions)</span></div>
                   <div class="kpi"><b>Expected attendance</b><span>15–25 participants</span></div>
                 </div>
-
-                <div class="placeholder" style="margin-top:18px">
-                  <b>Placeholders</b>
-                  <div class="tiny" style="margin-top:6px">
-                    Deadlines, submission link, and the exact workshop date/time are marked as <b>TBD</b> and ready to replace.
-                  </div>
-                </div>
+</div>
               </div>
             </div>
 
@@ -514,9 +508,7 @@
               <p class="prose" style="color:var(--muted-2)">
                 As MR becomes more socially visible and physically embedded (e.g., wearables, shared spaces, public deployments), designers will need patterns for transitions that are safe, comprehensible, and culturally sensitive — not just "cool".
               </p>
-              <div class="placeholder">
-                <b>Optional figure (TBD)</b>
-                <div class="tiny" style="margin-top:6px">Add a diagram of the reality–virtuality continuum, or a simple workflow of daily switching.</div>
+              <img class="img" data-placeholder="figure" data-title="Figure" data-subtitle="Add a diagram of the reality–virtuality continuum" alt="Optional figure placeholder image" />
               </div>
             </div>
           `
@@ -535,13 +527,7 @@
               <tr><th>Duration</th><td>Long workshop (two sessions) — 180 minutes total (2×90 minutes)</td></tr>
               <tr><th>Proceedings plan</th><td>CEUR-WS (workshop proceedings) + Zenodo mirror (DOIs)</td></tr>
             </table>
-
-            <div class="placeholder" style="margin-top:14px">
-              <b>Important dates (TBD)</b>
-              <div class="tiny" style="margin-top:6px">
-                Add submission deadline, notification date, camera-ready deadline, and any pre-workshop onboarding session(s).
-              </div>
-            </div>
+</div>
           `
         },
 
@@ -576,10 +562,16 @@
                 </ul>
 
                 <div class="placeholder" style="margin-top:12px">
-                  <b>Submission instructions (TBD)</b>
+                  <b>Submission instructions</b>
                   <div class="tiny" style="margin-top:6px">
-                    Add: formatting requirements, anonymization policy, submission platform link, and review criteria.
+                    Submit via this Google Form: <a href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener"><b>https://forms.gle/xUcm8cPiDVoDgMyN6</b></a>.
+                    <br />
+                    <span style="color:var(--muted)">TBD:</span> Add formatting requirements, anonymization policy, and review criteria here.
                   </div>
+                </div>
+
+                <div class="cta-row" style="margin-top:10px">
+                  <a class="btn primary" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Open submission form <span aria-hidden="true">↗</span></a>
                 </div>
 
                 <p class="tiny" style="margin-top:10px; color:var(--muted)">
@@ -668,8 +660,7 @@
                 <ul class="list">
                   <li>Proceedings (CEUR-WS) and a Zenodo mirror with DOI-based citation</li>
                   <li>Website update with accepted materials, photos, and a short synthesis report</li>
-                  <li>Community follow-up space (TBD: Discord/Slack) for continued collaboration</li>
-                </ul>
+                  </ul>
               </div>
             </div>
           `
@@ -694,14 +685,14 @@
                 affil:'Computer Vision Center (UAB) & Event Lab, University of Barcelona, Spain',
                 email:'alex.fuentes@autonoma.cat',
                 bio:'PhD student and research technician bridging AI and neuroscience to study how VR/MR can influence behavior.',
-                photo:'AlexImage.jpeg'
+                photo:'AlexProfilePicture.jpeg'
               })}
               ${organizerCard({
                 name:'Michael Wiesing',
                 affil:'Event Lab, University of Barcelona, Spain',
                 email:'m.wiesing@ub.edu',
                 bio:'Postdoctoral researcher focused on presence and co-presence in VR; develops Unity-based experiments and open tooling; co-organizes the annual VR Summit and Hackathon.',
-                photo:'MichaelImage.jpeg'
+                photo:'MichaelProfilePicture.jpeg'
               })}
               ${organizerCard({
                 name:'Roger Montserrat-Jovellar',
@@ -734,11 +725,7 @@
                 bio:'Distinguished Investigator and co-Director of Event Lab; long-standing VR researcher focusing on presence and body ownership, bridging technical development with cognitive neuroscience.'
               })}
             </div>
-
-            <div class="placeholder" style="margin-top:16px">
-              <b>Links (TBD)</b>
-              <div class="tiny" style="margin-top:6px">Optionally add each organizer’s homepage / Google Scholar / ORCID.</div>
-            </div>
+</div>
           `
         },
 
@@ -772,9 +759,16 @@
               </div>
             </div>
 
-            <div class="placeholder" style="margin-top:16px">
-              <b>Accessibility requests (TBD)</b>
-              <div class="tiny" style="margin-top:6px">Add a contact email + instructions for participants to share accommodation needs ahead of time.</div>
+            <div class="callout" style="margin-top:16px">
+              <b>Accessibility requests</b>
+              <div class="tiny" style="margin-top:8px">
+                Please email the organizers in advance with any accessibility needs so we can coordinate accommodations with CHI.
+                <ul class="list" style="margin-top:8px">
+                  <li><a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a></li>
+                  <li><a href="mailto:m.wiesing@ub.edu">m.wiesing@ub.edu</a></li>
+                </ul>
+              </div>
+            </div>
             </div>
           `
         },
@@ -790,10 +784,8 @@
                 <div class="callout">
                   <b>Workshop organizers</b>
                   <div class="tiny" style="margin-top:6px">
-                    <ul class="list">
-                      <li><a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a></li>
-                      <li><a href="mailto:alexfuentes@ub.edu">alexfuentes@ub.edu</a></li>
-                    </ul>
+                    <a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a> (primary contact) —
+                    <span style="color:var(--muted)">or update with a shared workshop mailbox (TBD).</span>
                   </div>
                 </div>
 
@@ -803,9 +795,7 @@
               </div>
 
               <div>
-                <div class="placeholder">
-                  <b>Mailing list / social links (TBD)</b>
-                  <div class="tiny" style="margin-top:6px">Add: mailing list signup, Discord/Slack, or social handles, plus a short code of conduct statement if desired.</div>
+                
                 </div>
               </div>
             </div>
