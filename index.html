@@ -119,6 +119,16 @@
       color: var(--accent-2);
       font-weight: 800;
     }
+    nav a.nav-cta{
+      background: rgba(47,143,91,.14);
+      border-color: rgba(47,143,91,.32);
+      color: var(--accent-2);
+      font-weight: 900;
+    }
+    nav a.nav-cta:hover{
+      background: rgba(47,143,91,.20);
+      border-color: rgba(47,143,91,.40);
+    }
 
     /* Layout */
     main{padding: 26px 0 64px}
@@ -318,6 +328,7 @@
             <li><a data-route href="#/overview">Overview</a></li>
             <li><a data-route href="#/key-info">Key info</a></li>
             <li><a data-route href="#/cfp">CFP</a></li>
+            <li><a class="nav-cta" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submit <span aria-hidden="true">↗</span></a></li>
             <li><a data-route href="#/program">Program</a></li>
             <li><a data-route href="#/organizers">Organizers</a></li>
             <li><a data-route href="#/accessibility">Accessibility</a></li>
@@ -395,7 +406,7 @@
           const kind = img.getAttribute('data-placeholder');
 
           // If a real local image is provided (e.g., in the same folder), prefer it.
-          // Example: <img data-src="AlexProfilePicture.jpeg" ...>
+          // Example: <img data-src="AlexImage.jpeg" ...>
           const realSrc = img.getAttribute('data-src');
           if (realSrc){
             img.onerror = () => {
@@ -412,7 +423,7 @@
           }
 
           const title = img.getAttribute('data-title') || (kind === 'avatar' ? 'Organizer photo' : 'Workshop image');
-          const subtitle = img.getAttribute('data-subtitle') || (kind === 'avatar' ? (img.getAttribute('data-name') || 'TBD') : 'Replace with final image');
+          const subtitle = img.getAttribute('data-subtitle') || (kind === 'avatar' ? (img.getAttribute('data-name') || 'Organizer') : 'Replace with final image');
           const w = kind === 'avatar' ? 400 : 1400;
           const h = kind === 'avatar' ? 400 : 720;
           img.src = svgPlaceholder({ title, subtitle, w, h });
@@ -566,7 +577,7 @@
                   <div class="tiny" style="margin-top:6px">
                     Submit via this Google Form: <a href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener"><b>https://forms.gle/xUcm8cPiDVoDgMyN6</b></a>.
                     <br />
-                    <span style="color:var(--muted)">TBD:</span> Add formatting requirements, anonymization policy, and review criteria here.
+                    
                   </div>
                 </div>
 
@@ -685,14 +696,14 @@
                 affil:'Computer Vision Center (UAB) & Event Lab, University of Barcelona, Spain',
                 email:'alex.fuentes@autonoma.cat',
                 bio:'PhD student and research technician bridging AI and neuroscience to study how VR/MR can influence behavior.',
-                photo:'AlexProfilePicture.jpeg'
+                photo:'AlexImage.jpeg'
               })}
               ${organizerCard({
                 name:'Michael Wiesing',
                 affil:'Event Lab, University of Barcelona, Spain',
                 email:'m.wiesing@ub.edu',
                 bio:'Postdoctoral researcher focused on presence and co-presence in VR; develops Unity-based experiments and open tooling; co-organizes the annual VR Summit and Hackathon.',
-                photo:'MichaelProfilePicture.jpeg'
+                photo:'MichaelImage.jpeg'
               })}
               ${organizerCard({
                 name:'Roger Montserrat-Jovellar',
@@ -762,16 +773,14 @@
             <div class="callout" style="margin-top:16px">
               <b>Accessibility requests</b>
               <div class="tiny" style="margin-top:8px">
-                Please email the organizers in advance with any accessibility needs so we can coordinate accommodations with CHI.
-                <ul class="list" style="margin-top:8px">
-                  <li><a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a></li>
-                  <li><a href="mailto:m.wiesing@ub.edu">m.wiesing@ub.edu</a></li>
-                </ul>
+                If you would like to request accommodations, please use the emails listed on the
+                <a href="#/contact"><b>Contact</b></a> page.
               </div>
             </div>
             </div>
           `
         },
+
 
         contact: {
           title: 'Contact',
@@ -783,9 +792,11 @@
                 <p class="prose">For questions about participation, submissions, or accessibility, contact:</p>
                 <div class="callout">
                   <b>Workshop organizers</b>
-                  <div class="tiny" style="margin-top:6px">
-                    <a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a> (primary contact) —
-                    <span style="color:var(--muted)">or update with a shared workshop mailbox (TBD).</span>
+                  <div class="tiny" style="margin-top:8px">
+                    <ul class="list">
+                      <li><a href="mailto:tsampounaris@ub.edu">tsampounaris@ub.edu</a></li>
+                      <li><a href="mailto:alexfuentes@ub.edu">alexfuentes@ub.edu</a></li>
+                    </ul>
                   </div>
                 </div>
 
