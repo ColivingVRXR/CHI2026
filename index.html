@@ -12,6 +12,9 @@
   <meta property="og:type" content="website" />
 
   <style>
+    /* Inline SVG icons */
+    .icon{width:1em; height:1em; vertical-align:-0.18em; margin-left:6px}
+
     :root{
       /* Light, white-green palette */
       --bg: #f4fbf6;
@@ -90,7 +93,7 @@
     }
     .brand-title{display:flex; flex-direction:column; line-height:1.05}
     .brand-title b{font-size:.98rem}
-    .brand-title span{font-size:.82rem; color:var(--muted)}
+    .brand-title span{font-size:.82rem; color:var(--muted); margin-top:4px; display:block}
 
     nav ul{
       list-style:none;
@@ -104,7 +107,7 @@
       display:inline-flex;
       align-items:center;
       padding: 8px 10px;
-      border-radius: 999px;
+      border-radius: 12px;
       color: var(--muted-2);
       border: 1px solid transparent;
     }
@@ -113,18 +116,8 @@
       border-color: rgba(47,143,91,.18);
       color: var(--text);
     }
-    nav a[aria-current="page"]{
-      background: rgba(47,143,91,.12);
-      border-color: rgba(47,143,91,.28);
-      color: var(--accent-2);
-      font-weight: 800;
-    }
-    nav a.nav-cta{
-      background: rgba(47,143,91,.14);
-      border-color: rgba(47,143,91,.32);
-      color: var(--accent-2);
-      font-weight: 900;
-    }
+    nav a[aria-current="page"]{$1font-weight: 600;$2}
+    nav a.nav-cta{$1font-weight: 700;$2}
     nav a.nav-cta:hover{
       background: rgba(47,143,91,.20);
       border-color: rgba(47,143,91,.40);
@@ -138,7 +131,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    .page{padding: 26px}
+    .page{padding: 26px; margin-top: 10px}
 
     .prose{max-width: 86ch}
     .spacer{height: 14px}
@@ -178,7 +171,7 @@
     .btn:hover{transform: translateY(-1px); background: rgba(47,143,91,.06)}
     .btn.primary{
       border-color: rgba(47,143,91,.32);
-      background: linear-gradient(180deg, rgba(47,143,91,.18), rgba(255,255,255,.95));
+      background: rgba(47,143,91,.12);
       color: var(--accent-2);
     }
 
@@ -186,7 +179,7 @@
     .grid-3{display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px}
 
     .kpi{
-      border:1px solid rgba(15,23,42,0.12);
+      border:1px solid rgba(15,23,42,0.20);
       background: rgba(47,143,91,.04);
       border-radius: var(--radius-sm);
       padding: 14px;
@@ -220,13 +213,8 @@
       border:1px solid rgba(15,23,42,0.12);
       background: rgba(255,255,255,.85);
     }
-    .table th,.table td{
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(15,23,42,0.10);
-      vertical-align:top;
-      text-align:left;
-    }
-    .table th{color: var(--text); font-weight:900; background: rgba(47,143,91,.06)}
+    .table th,.table td{$1border-bottom: 1px solid rgba(15,23,42,0.16);$2}
+    .table th{color: var(--text); font-weight:700; background: rgba(47,143,91,0.10)}
     .table tr:last-child td{border-bottom:none}
 
     .crumbs{color: var(--muted); font-size: .95rem; margin-bottom: 10px}
@@ -236,7 +224,7 @@
     /* Program layout inspired by a clean “schedule table + details” flow */
     .subhead{color: var(--muted); margin-top: -4px}
     .schedule-wrap{margin-top: 14px}
-    .schedule-table td.time{white-space:nowrap; width: 130px; font-weight:800; color: var(--accent-2)}
+    .schedule-table td.time{white-space:nowrap; width: 130px; font-weight:700; color: var(--accent-2)}
     .schedule-table td.event b{color: var(--text)}
     .section-block{margin-top: 22px}
     .section-block h3{margin-top: 0}
@@ -266,7 +254,7 @@
       align-items:start;
     }
     .avatar{width:72px; height:72px; border-radius: 18px; object-fit: cover}
-    .org .name{font-weight:950}
+    .org .name{font-weight:800}
     .org .affil{color:var(--muted); margin-top:4px; font-size:.95rem}
     .org .email{margin-top:10px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size:.92rem}
     .org .bio{color:var(--muted-2); margin-top:10px; font-size:.96rem}
@@ -285,6 +273,29 @@
       border: 1px solid rgba(15,23,42,0.12);
       background: rgba(255,255,255,.85);
       box-shadow: var(--shadow-sm);
+    }
+
+    /* Mobile nav (drawer) */
+    .desktop-nav{display:block}
+    .menu-btn{display:none; align-items:center; gap:10px; padding:8px 10px; border-radius:12px; border:1px solid rgba(15,23,42,0.12); background: rgba(255,255,255,.85); box-shadow: var(--shadow-sm); color: var(--muted-2); cursor:pointer; font-weight:600}
+    .menu-btn:hover{background: rgba(47,143,91,.06)}
+
+    .drawer-backdrop{position:fixed; inset:0; background: rgba(15,23,42,0.38); opacity:0; pointer-events:none; transition: opacity .16s ease; z-index:150}
+    .drawer{position:fixed; top:0; right:0; height:100%; width:min(320px, 92vw); background: rgba(255,255,255,.98); border-left:1px solid rgba(15,23,42,0.14); box-shadow: 0 24px 80px rgba(15,23,42,0.18); transform: translateX(104%); transition: transform .18s ease; z-index:160; padding:16px}
+    .drawer .drawer-head{display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:12px; border-bottom:1px solid rgba(15,23,42,0.10); margin-bottom:12px}
+    .drawer .drawer-head b{font-weight:700}
+    .drawer .close-btn{border:1px solid rgba(15,23,42,0.12); background: rgba(255,255,255,.9); border-radius:12px; padding:8px 10px; cursor:pointer}
+    .drawer .close-btn:hover{background: rgba(47,143,91,.06)}
+    .drawer a{display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-radius:12px; border:1px solid rgba(15,23,42,0.10); background: rgba(15,23,42,0.01); margin:8px 0; color: var(--muted-2); font-weight:600}
+    .drawer a:hover{background: rgba(47,143,91,.06); border-color: rgba(47,143,91,.22); color: var(--text)}
+    .drawer a.primary{background: rgba(47,143,91,.12); border-color: rgba(47,143,91,.28); color: var(--accent-2)}
+
+    body.drawer-open .drawer{transform: translateX(0)}
+    body.drawer-open .drawer-backdrop{opacity:1; pointer-events:auto}
+
+    @media (max-width: 860px){
+      .desktop-nav{display:none}
+      .menu-btn{display:inline-flex}
     }
 
     @media (max-width: 920px){
@@ -322,13 +333,22 @@
           This works on GitHub Pages with a single index.html, but feels like separate pages.
           If you prefer real files later (cfp.html, program.html, etc.), we can split it easily.
         -->
-        <nav aria-label="Primary">
+        <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
+          Menu
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="6" cy="12" r="1.6" fill="currentColor"/>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
+            <circle cx="18" cy="12" r="1.6" fill="currentColor"/>
+          </svg>
+        </button>
+
+        <nav class="desktop-nav" aria-label="Primary">
           <ul>
             <li><a data-route href="#/home">Home</a></li>
             <li><a data-route href="#/overview">Overview</a></li>
             <li><a data-route href="#/key-info">Key info</a></li>
             <li><a data-route href="#/cfp">CFP</a></li>
-            <li><a class="nav-cta" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submit <span aria-hidden="true">↗</span></a></li>
+            <li><a class="nav-cta" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
             <li><a data-route href="#/program">Program</a></li>
             <li><a data-route href="#/organizers">Organizers</a></li>
             <li><a data-route href="#/accessibility">Accessibility</a></li>
@@ -339,6 +359,28 @@
     </div>
   </header>
 
+  <!-- Mobile drawer nav -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="drawer-head">
+      <div>
+        <b>Menu</b>
+        <div class="tiny" style="color:var(--muted)">Co-Living • CHI 2026</div>
+      </div>
+      <button class="close-btn" id="drawerClose" type="button" aria-label="Close menu">Close</button>
+    </div>
+
+    <a href="#/home">Home</a>
+    <a href="#/overview">Overview</a>
+    <a href="#/key-info">Key info</a>
+    <a href="#/cfp">CFP</a>
+    <a class="primary" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a href="#/program">Program</a>
+    <a href="#/organizers">Organizers</a>
+    <a href="#/accessibility">Accessibility</a>
+    <a href="#/contact">Contact</a>
+  </aside>
+
   <main id="main" class="container">
     <div id="app" class="card page" role="document" aria-live="polite"></div>
   </main>
@@ -347,13 +389,41 @@
     <div class="container">
       <div class="footer-grid">
         <div class="tiny">© CHI 2026 • The Co-Living between Reality and Virtuality as a Daily Routine.</div>
-        <a class="toplink" href="#/home" aria-label="Back to home">Back to home <span aria-hidden="true">↩</span></a>
+        <a class="toplink" href="#/home" aria-label="Back to home">Back to home <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 6 4 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
       </div>
     </div>
 
     <script>
 
       const $app = document.getElementById('app');
+
+      // Mobile drawer behavior
+      const menuBtn = document.getElementById('menuBtn');
+      const drawer = document.getElementById('drawer');
+      const drawerBackdrop = document.getElementById('drawerBackdrop');
+      const drawerClose = document.getElementById('drawerClose');
+
+      function openDrawer(){
+        document.body.classList.add('drawer-open');
+        drawer?.setAttribute('aria-hidden','false');
+        menuBtn?.setAttribute('aria-expanded','true');
+      }
+      function closeDrawer(){
+        document.body.classList.remove('drawer-open');
+        drawer?.setAttribute('aria-hidden','true');
+        menuBtn?.setAttribute('aria-expanded','false');
+      }
+
+      menuBtn?.addEventListener('click', openDrawer);
+      drawerBackdrop?.addEventListener('click', closeDrawer);
+      drawerClose?.addEventListener('click', closeDrawer);
+      drawer?.addEventListener('click', (e) => {
+        const t = e.target;
+        if (t && t.tagName === 'A') closeDrawer();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDrawer();
+      });
 
       function crumbs(label){
         return `<div class="crumbs"><a href="#/home">Home</a> / <span>${label}</span></div>`;
@@ -435,7 +505,7 @@
           title: 'Home',
           render: () => `
             <div class="hero">
-              <img class="img banner" data-placeholder="banner" data-title="Workshop hero image" data-subtitle="Add a visual (MR / reality–virtuality continuum)" alt="Workshop hero placeholder image" />
+              <img class="img banner" data-placeholder="banner" data-src="MainImage.png" data-title="Workshop hero image" data-subtitle="MainImage.png" alt="Workshop main image" />
               <div class="hero-inner">
                 <div class="pill" style="margin-bottom:12px"><span class="dot" aria-hidden="true"></span><span>In-person workshop • CHI 2026 • Barcelona, Spain</span></div>
 
@@ -448,8 +518,8 @@
 
                 <div class="cta-row">
                   <a class="btn primary" href="#/cfp">Participate <span aria-hidden="true">→</span></a>
-                  <a class="btn" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submission form <span aria-hidden="true">↗</span></a>
-                  <a class="btn" href="https://chi2026.acm.org/" target="_blank" rel="noopener">CHI 2026 site <span aria-hidden="true">↗</span></a>
+                  <a class="btn" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Submission form <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                  <a class="btn" href="https://chi2026.acm.org/" target="_blank" rel="noopener">CHI 2026 site <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </div>
 
                 <div class="grid-3" style="margin-top:18px">
@@ -582,7 +652,7 @@
                 </div>
 
                 <div class="cta-row" style="margin-top:10px">
-                  <a class="btn primary" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Open submission form <span aria-hidden="true">↗</span></a>
+                  <a class="btn primary" href="https://forms.gle/xUcm8cPiDVoDgMyN6" target="_blank" rel="noopener">Open submission form <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </div>
 
                 <p class="tiny" style="margin-top:10px; color:var(--muted)">
@@ -857,8 +927,11 @@
 
         hydrateImages();
 
+        // Close drawer on route changes
+        closeDrawer();
+
         // Ensure top of content is visible when switching pages
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
 
       window.addEventListener('hashchange', render);
