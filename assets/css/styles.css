@@ -220,6 +220,8 @@ main{padding: 26px 0 64px}
 .schedule-wrap{margin-top: 14px}
 .schedule-table td.time{white-space:nowrap; width: 130px; font-weight:700; color: var(--accent-2)}
 .schedule-table td.event b{color: var(--text)}
+.schedule-table th, .schedule-table td{border-right: 1px solid rgba(15,23,42,0.12)}
+.schedule-table th:last-child, .schedule-table td:last-child{border-right: none}
 .section-block{margin-top: 22px}
 .section-block h3{margin-top: 0}
 .section-block p{max-width: 86ch}
@@ -368,3 +370,6 @@ body.drawer-open .drawer-backdrop{opacity:1; pointer-events:auto}
   .btn{transition:none}
   .btn:hover{transform:none}
 }
+
+/* Submissions closed */
+[data-submit]{display:none!important}
