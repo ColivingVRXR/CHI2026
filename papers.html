@@ -12,27 +12,6 @@
   <script src="assets/js/site.js" defer></script>
   <style>
     .papers-intro { margin-bottom: 2rem; }
-    .group-block { margin-bottom: 2.4rem; }
-    .group-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(47,143,91,.08);
-      border: 1px solid rgba(47,143,91,.18);
-      border-radius: 8px;
-      padding: 4px 10px;
-      margin-bottom: 10px;
-    }
-    .group-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
     .paper-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
     .paper-item {
       display: flex;
@@ -115,11 +94,6 @@
           <li><a data-page="overview.html" href="overview.html">Overview</a></li>
           <li><a data-page="key-info.html" href="key-info.html">Key info</a></li>
           <li><a data-page="cfp.html" href="cfp.html">CFP</a></li>
-          <li><a class="nav-cta" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></a></li>
           <li><a data-page="program.html" href="program.html">Program</a></li>
           <li><a data-page="papers.html" href="papers.html">Papers</a></li>
           <li><a data-page="organizers.html" href="organizers.html">Organizers</a></li>
@@ -146,11 +120,6 @@
   <a data-page="overview.html" href="overview.html">Overview</a>
   <a data-page="key-info.html" href="key-info.html">Key info</a>
   <a data-page="cfp.html" href="cfp.html">CFP</a>
-  <a class="primary" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></a>
   <a data-page="program.html" href="program.html">Program</a>
   <a data-page="papers.html" href="papers.html">Papers</a>
   <a data-page="organizers.html" href="organizers.html">Organizers</a>
@@ -165,159 +134,116 @@
       <p class="subhead">CHI 2026 Workshop • Barcelona, Spain • <b>April 2026</b></p>
 
       <div class="papers-intro">
-        <p class="prose">20 contributions accepted to the workshop, spanning position papers, demos, and a poster. Papers are grouped by thematic cluster for the workshop's co-design activities.</p>
+        <p class="prose">18 contributions accepted to the workshop, spanning position papers, a demo, and a poster.</p>
       </div>
 
       <div class="stats-row" role="list" aria-label="Submission statistics">
         <div class="stat" role="listitem">
-          <div class="stat-num">17</div>
+          <div class="stat-num">16</div>
           <div class="stat-label">Position papers</div>
         </div>
         <div class="stat" role="listitem">
-          <div class="stat-num">2</div>
-          <div class="stat-label">Demos</div>
+          <div class="stat-num">1</div>
+          <div class="stat-label">Demo</div>
         </div>
         <div class="stat" role="listitem">
           <div class="stat-num">1</div>
           <div class="stat-label">Poster</div>
         </div>
-        <div class="stat" role="listitem">
-          <div class="stat-num">4</div>
-          <div class="stat-label">Thematic groups</div>
-        </div>
       </div>
 
-      <!-- ── GROUP 1 ── -->
-      <div class="group-block">
-        <div class="group-label">Group 1 — The Architects</div>
-        <p class="group-desc">Infrastructure &amp; presence: technical foundations, latency, cross-reality cursors, and sensory transitions.</p>
-        <ul class="paper-list">
-          <li class="paper-item">
-            <span class="paper-author">Jonas Wombacher</span>
-            <span class="paper-title">A Two-Dimensional Reality-Virtuality Continuum Based on Technical Implementation and User Belief</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">David Kim (MJ)</span>
-            <span class="paper-title">Designing Mixed Reality Transitions as Multisensory Recalibration</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Effrosyni Sarri</span>
-            <span class="paper-title">Perceptual Sensitivity to Network Latency for Guidance Scenarios in Co-Located AR Collaboration</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Esen K. Tütüncü</span>
-            <span class="paper-title">World Mouse: Exploring Interactions with a Cross-Reality Cursor</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Nadezhda Murziakova</span>
-            <span class="paper-title">A Conceptual Re-framing of Sensory Mismatch for Cybersickness</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Kian Mirbagheri</span>
-            <span class="paper-title">What if the Dream is not Collapsing? Headless XR: Extending Virtual Interaction Without HMDs</span>
-            <span class="paper-type type-demo">Demo</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ── GROUP 2 ── -->
-      <div class="group-block">
-        <div class="group-label">Group 2 — The Domesticators</div>
-        <p class="group-desc">Smart environments: built spaces, smart homes, and everyday architectural integration of XR.</p>
-        <ul class="paper-list">
-          <li class="paper-item">
-            <span class="paper-author">Henning Pohl</span>
-            <span class="paper-title">Integrated Virtuality: Inspiration by the Built Environment</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Andrea Mattioli</span>
-            <span class="paper-title">Controlling Smart Environments with Mobile Augmented Reality and Recommender Systems</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Lori Kougioumtzian</span>
-            <span class="paper-title">NoFold: Cross-Reality Shared Experiences through a Web/XR Hybrid Platform for Tabletop Games</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Tetsunari Inamura</span>
-            <span class="paper-title">Calibrating Self-Efficacy in the Real World: MR Illusions Embedded in Everyday Architectural Structures</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ── GROUP 3 ── -->
-      <div class="group-block">
-        <div class="group-label">Group 3 — The Resilience Group</div>
-        <p class="group-desc">Health &amp; care: clinical integration, neurodivergence support, and accessibility in XR.</p>
-        <ul class="paper-list">
-          <li class="paper-item">
-            <span class="paper-author">Valerie Tan</span>
-            <span class="paper-title">A Roadmap of Mixed Reality Body Doubling for Adults with ADHD</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Jose Ferrer Costa</span>
-            <span class="paper-title">Embedding Extended Reality in Routine Primary Care: A Longitudinal Case Study of REDOCVR</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Constance Bault</span>
-            <span class="paper-title">Augmented Reality to Help Wayfinding for People with Intellectual Disability</span>
-            <span class="paper-type type-poster">Poster</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- ── GROUP 4 ── -->
-      <div class="group-block">
-        <div class="group-label">Group 4 — The Identity Guard</div>
-        <p class="group-desc">Ethics, memory &amp; culture: psychological impacts, cultural heritage, and ethical risks of XR co-living.</p>
-        <ul class="paper-list">
-          <li class="paper-item">
-            <span class="paper-author">Imane Chafi</span>
-            <span class="paper-title">EthnoAR: Enhancing Cultural Heritage with AR and Gamification at the National Museum of Ethnology in Japan</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Léana Petiot</span>
-            <span class="paper-title">Blurring the Virtual and the Real Risks Blurring People's Memories</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Mats Ole Ellenberg</span>
-            <span class="paper-title">BacteriaZoom: Connecting Digital Learning Material with Physical Worksheets through Handheld AR</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Sophia Bertoni</span>
-            <span class="paper-title">"You're dating... a robot?" A Preliminary Study on Perceived Harms of Intimate Companionship with Robots</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Annalisa Degenhard</span>
-            <span class="paper-title">Be Aware of the Simulation! Designing Responsible XR Environments for Memory Distortion Prevention</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">I.G.M. Darmawiguna</span>
-            <span class="paper-title">When Temples Travel: Cultural Impacts of Visualizing Sacred Sites in Foreign Contexts</span>
-            <span class="paper-type type-paper">Position paper</span>
-          </li>
-          <li class="paper-item">
-            <span class="paper-author">Jean-Marc Matos</span>
-            <span class="paper-title">F_AI_L</span>
-            <span class="paper-type type-demo">Demo</span>
-          </li>
-        </ul>
-      </div>
+      <ul class="paper-list">
+        <li class="paper-item">
+          <span class="paper-author">Jonas Wombacher</span>
+          <span class="paper-title">A Two-Dimensional Reality-Virtuality Continuum Based on Technical Implementation and User Belief</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">David Kim (MJ)</span>
+          <span class="paper-title">Designing Mixed Reality Transitions as Multisensory Recalibration</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Effrosyni Sarri</span>
+          <span class="paper-title">Perceptual Sensitivity to Network Latency for Guidance Scenarios in Co-Located AR Collaboration</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Esen K. Tütüncü</span>
+          <span class="paper-title">World Mouse: Exploring Interactions with a Cross-Reality Cursor</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Nadezhda Murziakova</span>
+          <span class="paper-title">A Conceptual Re-framing of Sensory Mismatch for Cybersickness</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Kian Mirbagheri</span>
+          <span class="paper-title">What if the Dream is not Collapsing? Headless XR: Extending Virtual Interaction Without HMDs</span>
+          <span class="paper-type type-demo">Demo</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Henning Pohl</span>
+          <span class="paper-title">Integrated Virtuality: Inspiration by the Built Environment</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Andrea Mattioli</span>
+          <span class="paper-title">Controlling Smart Environments with Mobile Augmented Reality and Recommender Systems</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Lori Kougioumtzian</span>
+          <span class="paper-title">NoFold: Cross-Reality Shared Experiences through a Web/XR Hybrid Platform for Tabletop Games</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Tetsunari Inamura</span>
+          <span class="paper-title">Calibrating Self-Efficacy in the Real World: MR Illusions Embedded in Everyday Architectural Structures</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Valerie Tan</span>
+          <span class="paper-title">A Roadmap of Mixed Reality Body Doubling for Adults with ADHD</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Jose Ferrer Costa</span>
+          <span class="paper-title">Embedding Extended Reality in Routine Primary Care: A Longitudinal Case Study of REDOCVR</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Constance Bault</span>
+          <span class="paper-title">Augmented Reality to Help Wayfinding for People with Intellectual Disability</span>
+          <span class="paper-type type-poster">Poster</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Imane Chafi</span>
+          <span class="paper-title">EthnoAR: Enhancing Cultural Heritage with AR and Gamification at the National Museum of Ethnology in Japan</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Léana Petiot</span>
+          <span class="paper-title">Blurring the Virtual and the Real Risks Blurring People's Memories</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Mats Ole Ellenberg</span>
+          <span class="paper-title">BacteriaZoom: Connecting Digital Learning Material with Physical Worksheets through Handheld AR</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">Sophia Bertoni</span>
+          <span class="paper-title">"You're dating... a robot?" A Preliminary Study on Perceived Harms of Intimate Companionship with Robots</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+        <li class="paper-item">
+          <span class="paper-author">I.G.M. Darmawiguna</span>
+          <span class="paper-title">When Temples Travel: Cultural Impacts of Visualizing Sacred Sites in Foreign Contexts</span>
+          <span class="paper-type type-paper">Position paper</span>
+        </li>
+      </ul>
 
     </div>
   </main>
