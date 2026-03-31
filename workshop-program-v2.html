@@ -532,6 +532,45 @@
   .phase:nth-child(2) .constraint::before { color: var(--blue); }
   .phase:nth-child(3) .constraint::before { color: var(--g4); }
 
+  /* ─── TIMELINE ROLES ─── */
+  .timeline-roles {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 8px 20px;
+  }
+
+  .timeline-roles-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 2px;
+    grid-column: 1 / -1;
+  }
+
+  .tl-role {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .tl-role-person {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(237,232,222,0.32);
+    font-weight: 500;
+  }
+
+  .tl-role-task {
+    font-size: 11px;
+    color: rgba(237,232,222,0.18);
+    line-height: 1.35;
+  }
+
   /* ─── PHASE ROLES ─── */
   .phase-roles {
     margin-top: 16px;
@@ -926,6 +965,11 @@
         </div>
         <p class="timeline-desc">A live demonstration that embodies the workshop theme before a word of theory is spoken. Alex is in the room wearing a Meta Quest headset connected to the projector. Georgios joins remotely — his avatar appears live in the physical space.</p>
         <div class="timeline-quote">"What you just experienced — a person present but not here, real but not physical — is the question we are gathered to answer."</div>
+        <div class="timeline-roles">
+          <div class="timeline-roles-heading">Organizer roles</div>
+          <div class="tl-role"><span class="tl-role-person">Alex</span><span class="tl-role-task">Lead — opens room, operates Meta Quest &amp; projector</span></div>
+          <div class="tl-role"><span class="tl-role-person">Georgios</span><span class="tl-role-task">Remote — joins as avatar, delivers welcome</span></div>
+        </div>
       </div>
     </div>
 
@@ -966,6 +1010,13 @@
           <span style="color:var(--g3)">■ Care Advocates</span> &nbsp;
           <span style="color:var(--g4)">■ Cultural Sentinels</span>
         </p>
+        <div class="timeline-roles">
+          <div class="timeline-roles-heading">Organizer roles</div>
+          <div class="tl-role"><span class="tl-role-person">Michael</span><span class="tl-role-task">MC &amp; strict timekeeper — cuts off at 3 min</span></div>
+          <div class="tl-role"><span class="tl-role-person">Roger</span><span class="tl-role-task">Moderator — introduces each presenter</span></div>
+          <div class="tl-role"><span class="tl-role-person">Kris</span><span class="tl-role-task">Documentation &amp; Poster Wall setup</span></div>
+          <div class="tl-role"><span class="tl-role-person">Katerina, Art</span><span class="tl-role-task">Active listeners — note connections &amp; tensions</span></div>
+        </div>
       </div>
     </div>
 
@@ -979,6 +1030,12 @@
         </div>
         <p class="timeline-desc">The 4 thematic groups are revealed. Participants find their assigned table, meet their groupmates, and do a brief orientation: read the group brief, share one observation from the lightning round, and identify one shared question to carry into the break.</p>
         <div class="timeline-quote">"Get to know your group now — the break is yours to continue the conversation."</div>
+        <div class="timeline-roles">
+          <div class="timeline-roles-heading">Organizer roles</div>
+          <div class="tl-role"><span class="tl-role-person">Alex</span><span class="tl-role-task">Reveals groups, directs to tables, hands out brief cards</span></div>
+          <div class="tl-role"><span class="tl-role-person">Michael</span><span class="tl-role-task">Timer — keeps transition to break on schedule</span></div>
+          <div class="tl-role"><span class="tl-role-person">Michael, Kris, Roger, Katerina</span><span class="tl-role-task">Each go to their group table to welcome members</span></div>
+        </div>
       </div>
     </div>
 
@@ -989,7 +1046,12 @@
 <div class="break-bar">
   <span class="break-label">Coffee Break</span>
   <div class="break-line"></div>
-  <span class="break-time">15:45 – 16:30</span>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-faint);white-space:nowrap;flex-shrink:0">
+    <span style="color:rgba(237,232,222,0.3)">Kris</span> Poster Wall &nbsp;·&nbsp;
+    <span style="color:rgba(237,232,222,0.3)">Art</span> Wall support &nbsp;·&nbsp;
+    <span style="color:rgba(237,232,222,0.3)">All</span> Mingle with groups
+  </span>
+  <span class="break-time" style="margin-left:24px">15:45 – 16:30</span>
 </div>
 
 <!-- ─── PART 2 ─── -->
