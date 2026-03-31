@@ -4,117 +4,331 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Program — Co-Living Reality ↔ Virtuality</title>
-  <meta name="description" content="A CHI 2026 workshop exploring seamless, inclusive co-living between Mixed Reality and Virtuality as part of everyday routines." />
-  <meta property="og:title" content="The Co-Living between Reality and Virtuality as a Daily Routine" />
-  <meta property="og:description" content="CHI 2026 Workshop — Barcelona, Spain — exploring seamless and inclusive transitions between reality and virtuality." />
+  <meta
+    name="description"
+    content="A CHI 2026 workshop exploring seamless, inclusive co-living between Mixed Reality and Virtuality as part of everyday routines."
+  />
+  <meta
+    property="og:title"
+    content="The Co-Living between Reality and Virtuality as a Daily Routine"
+  />
+  <meta
+    property="og:description"
+    content="CHI 2026 Workshop — Barcelona, Spain — exploring seamless and inclusive transitions between reality and virtuality."
+  />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <script src="assets/js/site.js" defer></script>
+
+  <style>
+    /* Page-specific refinements for the public program page */
+    main.program-main.container {
+      max-width: min(1280px, 96vw);
+    }
+
+    .program-shell {
+      width: 100%;
+    }
+
+    .program-head {
+      margin-bottom: 18px;
+    }
+
+    .program-head .subhead {
+      margin-bottom: 8px;
+    }
+
+    .program-meta {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 18px;
+    }
+
+    .program-meta-line {
+      color: var(--muted);
+    }
+
+    .program-meta-line strong {
+      color: var(--text);
+    }
+
+    .program-table {
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    .program-table th:nth-child(1),
+    .program-table td:nth-child(1) {
+      white-space: nowrap;
+      width: 18%;
+    }
+
+    .program-table th:nth-child(2),
+    .program-table td:nth-child(2) {
+      white-space: nowrap;
+      width: 14%;
+    }
+
+    .activity-title {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .activity-note {
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.96rem;
+    }
+
+    .program-callout {
+      margin-top: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .program-table th:nth-child(2),
+      .program-table td:nth-child(2) {
+        width: 18%;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
   <header>
-  <div class="container">
-    <div class="nav">
-      <a class="brand" href="index.html" aria-label="Workshop home">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brand-title">
-          <b>Co-Living: Reality ↔ Virtuality</b>
-          <span>CHI 2026 Workshop • Barcelona</span>
-        </div>
-      </a>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="index.html" aria-label="Workshop home">
+          <div class="logo" aria-hidden="true"></div>
+          <div class="brand-title">
+            <b>Co-Living: Reality ↔ Virtuality</b>
+            <span>CHI 2026 Workshop • Barcelona</span>
+          </div>
+        </a>
 
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
-        Menu <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <circle cx="6" cy="12" r="1.6" fill="currentColor"/>
-  <circle cx="12" cy="12" r="1.6" fill="currentColor"/>
-  <circle cx="18" cy="12" r="1.6" fill="currentColor"/>
-</svg>
+        <button
+          class="menu-btn"
+          id="menuBtn"
+          type="button"
+          aria-label="Open menu"
+          aria-controls="drawer"
+          aria-expanded="false"
+        >
+          Menu
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="6" cy="12" r="1.6" fill="currentColor"></circle>
+            <circle cx="12" cy="12" r="1.6" fill="currentColor"></circle>
+            <circle cx="18" cy="12" r="1.6" fill="currentColor"></circle>
+          </svg>
+        </button>
+
+        <nav class="desktop-nav" aria-label="Primary">
+          <ul>
+            <li><a data-page="index.html" href="index.html">Home</a></li>
+            <li><a data-page="overview.html" href="overview.html">Overview</a></li>
+            <li><a data-page="key-info.html" href="key-info.html">Key info</a></li>
+            <li><a data-page="cfp.html" href="cfp.html">CFP</a></li>
+            <li>
+              <a class="nav-cta" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">
+                Submit
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </a>
+            </li>
+            <li><a data-page="program.html" href="program.html">Program</a></li>
+            <li><a data-page="papers.html" href="papers.html">Papers</a></li>
+            <li><a data-page="organizers.html" href="organizers.html">Organizers</a></li>
+            <li><a data-page="accessibility.html" href="accessibility.html">Accessibility</a></li>
+            <li><a data-page="contact.html" href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile drawer nav -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" aria-label="Mobile navigation" aria-hidden="true">
+    <div class="drawer-head">
+      <div>
+        <b>Menu</b>
+        <div class="tiny" style="color: var(--muted)">Co-Living • CHI 2026</div>
+      </div>
+      <button class="close-btn" id="drawerClose" type="button" aria-label="Close menu">
+        Close
       </button>
-
-      <nav class="desktop-nav" aria-label="Primary">
-        <ul>
-          <li><a data-page="index.html" href="index.html">Home</a></li>
-          <li><a data-page="overview.html" href="overview.html">Overview</a></li>
-          <li><a data-page="key-info.html" href="key-info.html">Key info</a></li>
-          <li><a data-page="cfp.html" href="cfp.html">CFP</a></li>
-          <li><a class="nav-cta" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></a></li>
-          <li><a data-page="program.html" href="program.html">Program</a></li>
-          <li><a data-page="papers.html" href="papers.html">Papers</a></li>
-          <li><a data-page="organizers.html" href="organizers.html">Organizers</a></li>
-          <li><a data-page="accessibility.html" href="accessibility.html">Accessibility</a></li>
-          <li><a data-page="contact.html" href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
     </div>
-  </div>
-</header>
 
-<!-- Mobile drawer nav -->
-<div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
-<aside class="drawer" id="drawer" aria-label="Mobile navigation" aria-hidden="true">
-  <div class="drawer-head">
-    <div>
-      <b>Menu</b>
-      <div class="tiny" style="color:var(--muted)">Co-Living • CHI 2026</div>
-    </div>
-    <button class="close-btn" id="drawerClose" type="button" aria-label="Close menu">Close</button>
-  </div>
+    <a data-page="index.html" href="index.html">Home</a>
+    <a data-page="overview.html" href="overview.html">Overview</a>
+    <a data-page="key-info.html" href="key-info.html">Key info</a>
+    <a data-page="cfp.html" href="cfp.html">CFP</a>
+    <a class="primary" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">
+      Submit
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </a>
+    <a data-page="program.html" href="program.html">Program</a>
+    <a data-page="papers.html" href="papers.html">Papers</a>
+    <a data-page="organizers.html" href="organizers.html">Organizers</a>
+    <a data-page="accessibility.html" href="accessibility.html">Accessibility</a>
+    <a data-page="contact.html" href="contact.html">Contact</a>
+  </aside>
 
-  <a data-page="index.html" href="index.html">Home</a>
-  <a data-page="overview.html" href="overview.html">Overview</a>
-  <a data-page="key-info.html" href="key-info.html">Key info</a>
-  <a data-page="cfp.html" href="cfp.html">CFP</a>
-  <a class="primary" data-submit href="https://forms.gle/xUcm8cPiDVoDgMyN6">Submit <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M14 5h5v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10 14 19 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M19 14v5H5V5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></a>
-  <a data-page="program.html" href="program.html">Program</a>
-  <a data-page="papers.html" href="papers.html">Papers</a>
-  <a data-page="organizers.html" href="organizers.html">Organizers</a>
-  <a data-page="accessibility.html" href="accessibility.html">Accessibility</a>
-  <a data-page="contact.html" href="contact.html">Contact</a>
-</aside>
-  <main id="main" class="container">
-    <div class="card page" role="document">
-      <div class=”crumbs”><a href=”index.html”>Home</a> / <span>Program</span></div>
-<h1>Program</h1>
-<p class=”subhead”>CHI 2026 Workshop • Barcelona, Spain • <b>April 13–17, 2026</b></p>
-<p class=”prose” style=”color:var(--muted);margin-top:0;margin-bottom:18px”>Two 90-minute sessions separated by a 45-minute break — 180 minutes total.</p>
+  <main id="main" class="container program-main">
+    <div class="card page program-shell" role="document">
+      <div class="crumbs">
+        <a href="index.html">Home</a> / <span>Program</span>
+      </div>
 
-<table class=”table” style=”margin-top:16px”>
-  <tr><th>Time</th><th>Duration</th><th>Activity</th></tr>
-  <tr><td>14:15 – 14:27</td><td>12 min</td><td>Welcome &amp; Opening Provocation</td></tr>
-  <tr><td>14:27 – 15:27</td><td>60 min</td><td>The Lightning Round — 20 × 3-min presentations</td></tr>
-  <tr><td>15:27 – 15:45</td><td>18 min</td><td>Provocation Round — 5 statements, live vote, no debate</td></tr>
-  <tr><td>15:45 – 16:30</td><td>45 min</td><td>Coffee break + Connection Poster Walk</td></tr>
-  <tr><td>16:30 – 17:05</td><td>35 min</td><td>Phase 1 — Expert Workstreams</td></tr>
-  <tr><td>17:05 – 17:09</td><td>4 min</td><td>Golden Rule Showcase</td></tr>
-  <tr><td>17:09 – 17:45</td><td>36 min</td><td>Phase 2 — The 24-Hour Stress Test</td></tr>
-  <tr><td>17:45 – 18:00</td><td>15 min</td><td>Phase 3 — Manifesto Reveal</td></tr>
-</table>
+      <div class="program-head">
+        <h1>Program</h1>
+        <p class="subhead">CHI 2026 Workshop • Barcelona, Spain</p>
+      </div>
 
-<div class=”callout” style=”margin-top:14px”>
-  <b>Output: the Co-Living Design &amp; Ethics Manifesto</b>
-  <div class=”tiny” style=”margin-top:6px”>8 Golden Rules + 4 Persona Maps identifying where technical goals and human ethics conflict.</div>
-</div>
+      <div class="program-meta">
+        <p class="prose program-meta-line">
+          <strong>Tuesday, April 14 2026 [14:15 - 15:45 and 16:30 - 18:00 CET]</strong>
+        </p>
+        <p class="prose program-meta-line">
+          Two 90-minute sessions separated by a 45-minute break — 180 minutes total.
+        </p>
+      </div>
+
+		<table class="table program-table" aria-label="Workshop program schedule">
+		  <thead>
+			<tr>
+			  <th>Time</th>
+			  <th>Duration</th>
+			  <th>Session</th>
+			</tr>
+		  </thead>
+		  <tbody>
+			<tr>
+			  <td>14:15 – 14:30</td>
+			  <td>15 min</td>
+			  <td>
+				<div class="activity-title">Welcome &amp; Opening</div>
+				<div class="activity-note">
+				  Introduction to the workshop theme and framing of the day.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>14:30 – 15:30</td>
+			  <td>60 min</td>
+			  <td>
+				<div class="activity-title">Lightning Round</div>
+				<div class="activity-note">
+				  Short presentations from accepted contributions, focused on everyday XR contexts.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>15:30 – 15:45</td>
+			  <td>15 min</td>
+			  <td>
+				<div class="activity-title">Thematic Groups &amp; Golden Rules Kick-off</div>
+				<div class="activity-note">
+				  Formation of thematic groups, introduction of the Golden Rules activity, and first group discussion to prepare the collaborative session.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>15:45 – 16:30</td>
+			  <td>45 min</td>
+			  <td>
+				<div class="activity-title">Break — Coffee &amp; Poster Walk</div>
+				<div class="activity-note">
+				  Informal discussion, networking, and exploration of paper connections.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>16:30 – 16:50</td>
+			  <td>20 min</td>
+			  <td>
+				<div class="activity-title">Golden Rules Workstreams</div>
+				<div class="activity-note">
+				  Thematic groups develop shared technical and ethical principles for XR co-living.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>16:50 – 17:00</td>
+			  <td>10 min</td>
+			  <td>
+				<div class="activity-title">Golden Rules Sharing</div>
+				<div class="activity-note">
+				  Short presentation of the rules developed by each group.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>17:00 – 17:40</td>
+			  <td>40 min</td>
+			  <td>
+				<div class="activity-title">Persona Stress Test</div>
+				<div class="activity-note">
+				  Mixed groups apply the rules to concrete personas and identify tensions in practice.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>17:40 – 17:55</td>
+			  <td>15 min</td>
+			  <td>
+				<div class="activity-title">Persona Sharing &amp; Rule Revisions</div>
+				<div class="activity-note">
+				  Mixed groups present their personas, highlight tensions, and propose any new or revised Golden Rules emerging from the discussion.
+				</div>
+			  </td>
+			</tr>
+			<tr>
+			  <td>17:55 – 18:00</td>
+			  <td>5 min</td>
+			  <td>
+				<div class="activity-title">Closing Remarks</div>
+				<div class="activity-note">
+				  Final reflections, collective wrap-up, and next steps.
+				</div>
+			  </td>
+			</tr>
+		  </tbody>
+		</table>
+
+      <div class="callout program-callout">
+        <b>Expected outcome</b>
+        <div class="tiny" style="margin-top: 6px">
+          A public workshop synthesis bringing together practical and ethical guidance for future XR development in everyday life contexts.
+        </div>
+      </div>
     </div>
   </main>
+
   <footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="tiny">© CHI 2026 • The Co-Living between Reality and Virtuality as a Daily Routine.</div>
-      <a class="toplink" href="index.html" aria-label="Back to home">Back to home <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <path d="M10 6 4 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-</svg></a>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="tiny">
+          © CHI 2026 • The Co-Living between Reality and Virtuality as a Daily Routine.
+        </div>
+        <a class="toplink" href="index.html" aria-label="Back to home">
+          Back to home
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M10 6 4 12l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4 12h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </a>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 </body>
 </html>
