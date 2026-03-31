@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Program v2 — Co-Living: Reality ↔ Virtuality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080e;
+    --bg2: #0e0e1a;
+    --bg3: #13131f;
+    --surface: #16162200;
+    --border: rgba(255,255,255,0.06);
+    --text: #ede8de;
+    --text-dim: rgba(237,232,222,0.45);
+    --text-faint: rgba(237,232,222,0.2);
+    --gold: #c8a86a;
+    --gold-dim: rgba(200,168,106,0.15);
+    --gold-glow: rgba(200,168,106,0.06);
+    --blue: #6ec6f5;
+    --blue-dim: rgba(110,198,245,0.12);
+    --g1: #5cd4c4;  /* threshold engineers — teal */
+    --g2: #e8a44a;  /* habitat weavers — amber */
+    --g3: #e06b8a;  /* care advocates — rose */
+    --g4: #9b7fe8;  /* cultural sentinels — violet */
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  /* ─── GRID LINES ─── */
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 998;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 10vw;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(110,198,245,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(200,168,106,0.05) 0%, transparent 50%);
+  }
+
+  .hero-orb {
+    position: absolute;
+    width: 600px; height: 600px;
+    right: -100px; top: -100px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,198,245,0.06) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.08); opacity: 0.7; }
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 800px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.4s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-title .arrow {
+    font-style: normal;
+    color: var(--blue);
+    font-size: 0.8em;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.7s;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .meta-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .hero-goal {
+    margin-top: 40px;
+    padding: 24px 28px;
+    border: 1px solid rgba(200,168,106,0.2);
+    background: var(--gold-glow);
+    max-width: 700px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  .hero-goal p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .hero-goal strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION WRAPPER ─── */
+  .section {
+    padding: 80px 10vw;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    white-space: nowrap;
+  }
+
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+
+  .section-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--gold);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ─── TIMELINE ─── */
+  .timeline {
+    position: relative;
+    padding-left: 200px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 160px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border) 10%, var(--border) 90%, transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .timeline-time {
+    position: absolute;
+    left: -200px;
+    top: 4px;
+    width: 140px;
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    line-height: 1.3;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -44px;
+    top: 8px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px rgba(200,168,106,0.5);
+  }
+
+  .timeline-dot.blue {
+    background: var(--blue);
+    box-shadow: 0 0 12px rgba(110,198,245,0.5);
+  }
+
+  .timeline-content {
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    transition: border-color 0.3s ease;
+  }
+
+  .timeline-content:hover {
+    border-color: rgba(200,168,106,0.2);
+  }
+
+  .timeline-content.highlight {
+    border-color: rgba(200,168,106,0.3);
+    background: linear-gradient(135deg, var(--bg2), rgba(200,168,106,0.04));
+  }
+
+  .timeline-content-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: 1px solid rgba(200,168,106,0.3);
+    white-space: nowrap;
+  }
+
+  .timeline-label.blue {
+    color: var(--blue);
+    border-color: rgba(110,198,245,0.3);
+  }
+
+  .timeline-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.2;
+    flex: 1;
+  }
+
+  .timeline-desc {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .timeline-quote {
+    font-family: 'Outfit', sans-serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-dim);
+    padding: 12px 16px;
+    border-left: 2px solid var(--gold);
+    margin-top: 12px;
+    background: var(--gold-glow);
+  }
+
+  /* ─── PRESENTATION TABLE ─── */
+  .pres-grid {
+    margin-top: 16px;
+    display: grid;
+    gap: 2px;
+  }
+
+  .pres-row {
+    display: grid;
+    grid-template-columns: 32px 1fr 3fr;
+    gap: 16px;
+    padding: 9px 12px;
+    background: var(--bg3);
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .pres-row:hover {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .pres-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    padding-top: 2px;
+  }
+
+  .pres-author {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .pres-author.g1 { color: var(--g1); }
+  .pres-author.g2 { color: var(--g2); }
+  .pres-author.g3 { color: var(--g3); }
+  .pres-author.g4 { color: var(--g4); }
+
+  .pres-title {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* ─── BREAK ─── */
+  .break-bar {
+    margin: 0;
+    padding: 28px 10vw;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(90deg, var(--bg2), var(--bg3), var(--bg2));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .break-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+  }
+
+  .break-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  .break-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── PHASE BLOCKS ─── */
+  .phases {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .phase {
+    padding: 32px 28px;
+    background: var(--bg2);
+    border-top: 2px solid var(--border);
+    transition: border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phase:hover { border-top-color: var(--gold); }
+  .phase:nth-child(2):hover { border-top-color: var(--blue); }
+  .phase:nth-child(3):hover { border-top-color: var(--g4); }
+
+  .phase::before {
+    content: attr(data-num);
+    position: absolute;
+    right: 20px; top: 20px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    line-height: 1;
+  }
+
+  .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .phase:nth-child(2) .phase-label { color: var(--blue); }
+  .phase:nth-child(3) .phase-label { color: var(--g4); }
+
+  .phase-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+  }
+
+  .phase-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .phase-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+
+  .phase-task {
+    padding: 14px;
+    background: rgba(255,255,255,0.03);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .phase-task strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .phase-constraints {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .constraint {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-dim);
+    align-items: flex-start;
+  }
+
+  .constraint::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .phase:nth-child(2) .constraint::before { color: var(--blue); }
+  .phase:nth-child(3) .constraint::before { color: var(--g4); }
+
+  /* ─── PHASE ROLES ─── */
+  .phase-roles {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .phase-roles-heading {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  .phase-role-row {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+  }
+
+  .phase-role-person {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(237,232,222,0.3);
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+
+  .phase-role-desc {
+    font-size: 11px;
+    color: rgba(237,232,222,0.18);
+    line-height: 1.4;
+  }
+
+  /* ─── GROUPS ─── */
+  .groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .group-card {
+    padding: 36px 32px;
+    background: var(--bg2);
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .group-card:hover { background: var(--bg3); }
+
+  .group-card.g1 { border-left-color: var(--g1); }
+  .group-card.g2 { border-left-color: var(--g2); }
+  .group-card.g3 { border-left-color: var(--g3); }
+  .group-card.g4 { border-left-color: var(--g4); }
+
+  .group-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .group-card.g1 .group-num { color: var(--g1); }
+  .group-card.g2 .group-num { color: var(--g2); }
+  .group-card.g3 .group-num { color: var(--g3); }
+  .group-card.g4 .group-num { color: var(--g4); }
+
+  .group-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 4px;
+  }
+
+  .group-focus {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .group-members {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .group-member {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .member-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    min-width: 140px;
+    flex-shrink: 0;
+  }
+
+  .member-paper {
+    font-size: 12px;
+    color: var(--text-faint);
+    line-height: 1.4;
+  }
+
+  /* ─── PERSONAS ─── */
+  .personas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 0;
+  }
+
+  .persona-card {
+    padding: 32px 28px;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .persona-card:hover { background: var(--bg3); }
+
+  .persona-bg-letter {
+    position: absolute;
+    right: -10px; bottom: -20px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 140px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.025);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .persona-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .persona-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+
+  .persona-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin-bottom: 18px;
+  }
+
+  .persona-challenges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .challenge-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid rgba(110,198,245,0.2);
+    color: var(--blue);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── GOLDEN RULE ─── */
+  .golden-rule-section {
+    padding: 80px 10vw;
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .golden-rule-template {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(20px, 2.5vw, 32px);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text-dim);
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+  }
+
+  .golden-rule-template .bracket {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .golden-rule-example {
+    font-family: 'Outfit', sans-serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-faint);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 40px 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+  }
+
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 10vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+    pointer-events: none;
+  }
+
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    text-transform: uppercase;
+    pointer-events: all;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    pointer-events: all;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── DIVIDERS ─── */
+  .divider {
+    padding: 0 10vw;
+    margin: 0;
+  }
+
+  .divider hr {
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .part-intro {
+    padding: 60px 10vw 0;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .part-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .part-badge.gold {
+    color: var(--gold);
+    border-color: rgba(200,168,106,0.4);
+    background: var(--gold-glow);
+  }
+
+  .part-badge.blue {
+    color: var(--blue);
+    border-color: rgba(110,198,245,0.3);
+    background: var(--blue-dim);
+  }
+
+  .part-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .part-duration {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">CHI 2026 · Workshop</span>
+  <div class="nav-links">
+    <a href="#part1">Part I</a>
+    <a href="#part2">Part II</a>
+    <a href="#groups">Groups</a>
+    <a href="#personas">Personas</a>
+    <a href="#golden-rule">Golden Rule</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-label">CHI 2026 · Barcelona · April 2026 · Workshop Program · v2</div>
+  <h1 class="hero-title">
+    The Co-Living between<br>
+    <em>Reality</em> <span class="arrow">↔</span> <em>Virtuality</em><br>
+    as a Daily Routine
+  </h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="meta-label">Format</span>
+      <span class="meta-value">2 × 90 min sessions</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-label">Presentations</span>
+      <span class="meta-value">18 lightning talks</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-label">Output</span>
+      <span class="meta-value">8 Golden Rules + 4 Persona Maps</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="meta-label">Groups</span>
+      <span class="meta-value">4 thematic workstreams</span>
+    </div>
+  </div>
+  <div class="hero-goal">
+    <p><strong>Main Goal:</strong> Move from "using XR" to "living in XR" by creating a collective <strong>Co-Living Design & Ethics Manifesto</strong> — 8 Golden Rules and 4 Persona Maps that surface the tensions between technical ambition and human ethics.</p>
+  </div>
+</section>
+
+<!-- ─── PART 1 ─── -->
+<div class="part-intro" id="part1">
+  <span class="part-badge gold">Part I — The Landscape</span>
+  <div class="part-line"></div>
+  <span class="part-duration">14:15 – 15:45</span>
+</div>
+
+<section class="section">
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-time">14:15<br>14:27</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content highlight">
+        <div class="timeline-content-header">
+          <div class="timeline-name">Welcome & Opening Provocation</div>
+          <span class="timeline-label">12 min</span>
+        </div>
+        <p class="timeline-desc">A live demonstration that embodies the workshop theme before a word of theory is spoken. Alex is in the room wearing a Meta Quest headset connected to the projector. Georgios joins remotely — his avatar appears live in the physical space.</p>
+        <div class="timeline-quote">"What you just experienced — a person present but not here, real but not physical — is the question we are gathered to answer."</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-time">14:27<br>15:21</div>
+      <div class="timeline-dot blue"></div>
+      <div class="timeline-content">
+        <div class="timeline-content-header">
+          <div class="timeline-name">The Lightning Round</div>
+          <span class="timeline-label blue">54 min · 18 × 3'</span>
+        </div>
+        <p class="timeline-desc">No "Related Work" slides. Each presenter answers one question:</p>
+        <div class="timeline-quote">"How does my work change the way a human experiences their physical home or self?"</div>
+        <div class="pres-grid" style="margin-top:20px">
+          <div class="pres-row"><span class="pres-num">01</span><span class="pres-author g1">J. Wombacher</span><span class="pres-title">A Two-Dimensional Reality-Virtuality Continuum</span></div>
+          <div class="pres-row"><span class="pres-num">02</span><span class="pres-author g2">H. Pohl</span><span class="pres-title">Integrated Virtuality: Inspiration by the Built Environment</span></div>
+          <div class="pres-row"><span class="pres-num">03</span><span class="pres-author g3">V. Tan</span><span class="pres-title">A Roadmap of MR Body Doubling for Adults with ADHD</span></div>
+          <div class="pres-row"><span class="pres-num">04</span><span class="pres-author g4">I. Chafi</span><span class="pres-title">EthnoAR: Cultural Heritage with AR and Gamification</span></div>
+          <div class="pres-row"><span class="pres-num">05</span><span class="pres-author g1">D. Kim (MJ)</span><span class="pres-title">Designing MR Transitions as Multisensory Recalibration</span></div>
+          <div class="pres-row"><span class="pres-num">06</span><span class="pres-author g2">A. Mattioli</span><span class="pres-title">Controlling Smart Environments with Mobile AR</span></div>
+          <div class="pres-row"><span class="pres-num">07</span><span class="pres-author g3">J. Ferrer Costa</span><span class="pres-title">Embedding XR in Routine Primary Care (REDOCVR)</span></div>
+          <div class="pres-row"><span class="pres-num">08</span><span class="pres-author g4">L. Petiot</span><span class="pres-title">Blurring the Virtual and the Real Risks Blurring People's Memories</span></div>
+          <div class="pres-row"><span class="pres-num">09</span><span class="pres-author g1">E. Sarri</span><span class="pres-title">Perceptual Sensitivity to Network Latency in Co-Located AR</span></div>
+          <div class="pres-row"><span class="pres-num">10</span><span class="pres-author g2">L. Kougioumtzian</span><span class="pres-title">NoFold: Cross-Reality Shared Experiences for Tabletop Games</span></div>
+          <div class="pres-row"><span class="pres-num">11</span><span class="pres-author g4">M. Ellenberg</span><span class="pres-title">BacteriaZoom: Physical Worksheets through Handheld AR</span></div>
+          <div class="pres-row"><span class="pres-num">12</span><span class="pres-author g1">E. Tütüncü</span><span class="pres-title">World Mouse: A Cross-Reality Cursor</span></div>
+          <div class="pres-row"><span class="pres-num">13</span><span class="pres-author g3">C. Bault</span><span class="pres-title">AR Wayfinding for People with Intellectual Disability</span></div>
+          <div class="pres-row"><span class="pres-num">14</span><span class="pres-author g4">S. Bertoni</span><span class="pres-title">"You're dating... a robot?" — Intimate Companionship Harms</span></div>
+          <div class="pres-row"><span class="pres-num">15</span><span class="pres-author g1">N. Murziakova</span><span class="pres-title">A Conceptual Re-framing of Sensory Mismatch for Cybersickness</span></div>
+          <div class="pres-row"><span class="pres-num">16</span><span class="pres-author g2">T. Inamura</span><span class="pres-title">Calibrating Self-Efficacy via MR in Everyday Architecture</span></div>
+          <div class="pres-row"><span class="pres-num">17</span><span class="pres-author g4">I. Darmawiguna</span><span class="pres-title">When Temples Travel: Sacred Sites in Foreign Contexts</span></div>
+          <div class="pres-row"><span class="pres-num">18</span><span class="pres-author g1">K. Mirbagheri</span><span class="pres-title">Headless XR: Extending Virtual Interaction Without HMDs</span></div>
+        </div>
+        <p style="font-size:11px;color:var(--text-faint);margin-top:12px;font-family:'JetBrains Mono',monospace">
+          Color indicates group assignment:
+          <span style="color:var(--g1)">■ Threshold Engineers</span> &nbsp;
+          <span style="color:var(--g2)">■ Habitat Weavers</span> &nbsp;
+          <span style="color:var(--g3)">■ Care Advocates</span> &nbsp;
+          <span style="color:var(--g4)">■ Cultural Sentinels</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-time">15:21<br>15:45</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-content highlight">
+        <div class="timeline-content-header">
+          <div class="timeline-name">Group Assembly</div>
+          <span class="timeline-label">24 min</span>
+        </div>
+        <p class="timeline-desc">The 4 thematic groups are revealed. Participants find their assigned table, meet their groupmates, and do a brief orientation: read the group brief, share one observation from the lightning round, and identify one shared question to carry into the break.</p>
+        <div class="timeline-quote">"Get to know your group now — the break is yours to continue the conversation."</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── BREAK ─── -->
+<div class="break-bar">
+  <span class="break-label">Coffee Break</span>
+  <div class="break-line"></div>
+  <span class="break-time">15:45 – 16:30</span>
+</div>
+
+<!-- ─── PART 2 ─── -->
+<div class="part-intro" id="part2">
+  <span class="part-badge blue">Part II — The Co-Living Synthesis</span>
+  <div class="part-line"></div>
+  <span class="part-duration">16:30 – 18:00</span>
+</div>
+
+<section class="section" style="padding-bottom:0">
+  <div class="phases">
+
+    <div class="phase" data-num="1">
+      <div class="phase-label">Phase 1 · Expert Workstreams</div>
+      <div class="phase-time">16:30 – 17:05 · 35 min</div>
+      <div class="phase-name">Drafting the Golden Rules</div>
+      <div class="phase-desc">Groups were formed at the end of Part I and have already met during the break. Participants return to their tables and dive straight into distilling their collective research into 2 Universal Guidelines.</div>
+      <div class="phase-task">
+        <strong>Task:</strong> Write two "Golden Rules" for Co-Living — one <strong>Technical</strong> (how to build it) and one <strong>Ethical</strong> (how to protect the user). Use the Golden Rule Template.
+      </div>
+      <div class="phase-constraints">
+        <div class="constraint">Output written on a large poster</div>
+        <div class="constraint">All 4 groups post simultaneously</div>
+      </div>
+      <div class="phase-roles">
+        <div class="phase-roles-heading">Organizer roles</div>
+        <div class="phase-role-row"><span class="phase-role-person">Michael</span><span class="phase-role-desc">Facilitates Group 1 — Threshold Engineers</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Kris</span><span class="phase-role-desc">Facilitates Group 2 — Habitat Weavers</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Roger</span><span class="phase-role-desc">Facilitates Group 3 — Care Advocates</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Katerina</span><span class="phase-role-desc">Facilitates Group 4 — Cultural Sentinels</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Art</span><span class="phase-role-desc">Roving challenger across all groups</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Georgios</span><span class="phase-role-desc">Remote observer — available on screen</span></div>
+      </div>
+    </div>
+
+    <div class="phase" style="--accent:var(--gold);background:var(--gold-dim);border-color:rgba(200,168,106,0.18)">
+      <div class="phase-label" style="color:var(--gold)">Golden Rule Showcase</div>
+      <div class="phase-time">17:05 – 17:09 · 4 min</div>
+      <div class="phase-name">All Groups Present</div>
+      <div class="phase-desc">Each of the 4 thematic groups takes 1 minute on stage to present their 2 Golden Rules to the full room. Rules stay visible on the wall for Phase 2. Coordinated by Alex.</div>
+      <div class="phase-constraints">
+        <div class="constraint">1 min per group · strict timing</div>
+        <div class="constraint">Rules remain on the wall</div>
+      </div>
+      <div class="phase-roles">
+        <div class="phase-roles-heading">Organizer roles</div>
+        <div class="phase-role-row"><span class="phase-role-person">Alex</span><span class="phase-role-desc">Hosts — calls each group up, keeps strict timing</span></div>
+      </div>
+    </div>
+
+    <div class="phase" data-num="2">
+      <div class="phase-label">Phase 2 · Mixed Persona Test</div>
+      <div class="phase-time">17:09 – 17:45 · 36 min</div>
+      <div class="phase-name">The 24-Hour Stress Test</div>
+      <div class="phase-desc">The Jigsaw Swap: participants move to Mixed Groups. Each new table has one representative from each Phase 1 group. A Persona Card is assigned.</div>
+      <div class="phase-task">
+        <strong>Task:</strong> Map your persona's day from 08:00 to 22:00. Find the moment the Golden Rules fail — where would experts disagree?
+      </div>
+      <div class="phase-constraints">
+        <div class="constraint">Apply ≥3 technologies from your table</div>
+        <div class="constraint">Follow ≥4 Golden Rules from Phase 1</div>
+        <div class="constraint">Identify the Conflict Point</div>
+      </div>
+      <div class="phase-roles">
+        <div class="phase-roles-heading">Organizer roles</div>
+        <div class="phase-role-row"><span class="phase-role-person">Michael</span><span class="phase-role-desc">Jigsaw swap coordinator + phase timer</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Roger</span><span class="phase-role-desc">Facilitates Mixed Group A</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Katerina</span><span class="phase-role-desc">Facilitates Mixed Group B</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Art</span><span class="phase-role-desc">Facilitates Mixed Group C</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Alex</span><span class="phase-role-desc">Facilitates Mixed Group D</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Kris</span><span class="phase-role-desc">Floats all tables, helps surface Conflict Points</span></div>
+      </div>
+    </div>
+
+    <div class="phase" data-num="3">
+      <div class="phase-label">Phase 3 · Final Reveal</div>
+      <div class="phase-time">17:45 – 18:00 · 15 min</div>
+      <div class="phase-name">The Manifesto Presentation</div>
+      <div class="phase-desc">Each mixed group presents their <em>Conflict Point</em> — the gap in current research that the field must solve next.</div>
+      <div class="phase-task">
+        <strong>Output:</strong> 8 Golden Rules + 4 Persona Maps on the wall. Final group photo. The Co-Living Manifesto is born.
+      </div>
+      <div class="phase-constraints">
+        <div class="constraint">1 min per group for Conflict Point</div>
+        <div class="constraint">Closing words from organizers</div>
+      </div>
+      <div class="phase-roles">
+        <div class="phase-roles-heading">Organizer roles</div>
+        <div class="phase-role-row"><span class="phase-role-person">Katerina</span><span class="phase-role-desc">MC — calls groups, delivers synthesis</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Georgios</span><span class="phase-role-desc">Closing words as remote avatar</span></div>
+        <div class="phase-role-row"><span class="phase-role-person">Kris</span><span class="phase-role-desc">Takes the final group photo</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── GROUPS ─── -->
+<section class="section" id="groups">
+  <div class="section-header">
+    <span class="section-tag">Appendix A</span>
+    <h2 class="section-title">Thematic Groups</h2>
+  </div>
+  <div class="groups">
+
+    <div class="group-card g1">
+      <div class="group-num">Group 1</div>
+      <div class="group-name">The Threshold Engineers</div>
+      <div class="group-focus">Perception & Transitions — latency, sensory recalibration, cross-reality interaction, cybersickness</div>
+      <div class="group-members">
+        <div class="group-member"><span class="member-name">Jonas Wombacher</span><span class="member-paper">Reality-Virtuality Continuum</span></div>
+        <div class="group-member"><span class="member-name">David Kim (MJ)</span><span class="member-paper">MR Transitions as Multisensory Recalibration</span></div>
+        <div class="group-member"><span class="member-name">Effrosyni Sarri</span><span class="member-paper">Perceptual Sensitivity to Network Latency</span></div>
+        <div class="group-member"><span class="member-name">Esen K. Tütüncü</span><span class="member-paper">World Mouse: Cross-Reality Cursor</span></div>
+        <div class="group-member"><span class="member-name">N. Murziakova</span><span class="member-paper">Sensory Mismatch for Cybersickness</span></div>
+        <div class="group-member"><span class="member-name">Kian Mirbagheri</span><span class="member-paper">Headless XR (Demo)</span></div>
+      </div>
+    </div>
+
+    <div class="group-card g2">
+      <div class="group-num">Group 2</div>
+      <div class="group-name">The Habitat Weavers</div>
+      <div class="group-focus">Space & Everyday Integration — smart homes, built environments, social spaces, architectural embodiment</div>
+      <div class="group-members">
+        <div class="group-member"><span class="member-name">Henning Pohl</span><span class="member-paper">Integrated Virtuality: Built Environment</span></div>
+        <div class="group-member"><span class="member-name">Andrea Mattioli</span><span class="member-paper">Smart Environments with Mobile AR</span></div>
+        <div class="group-member"><span class="member-name">Lori Kougioumtzian</span><span class="member-paper">NoFold: Cross-Reality Tabletop Games</span></div>
+        <div class="group-member"><span class="member-name">Tetsunari Inamura</span><span class="member-paper">Self-Efficacy in Everyday Architecture</span></div>
+      </div>
+    </div>
+
+    <div class="group-card g3">
+      <div class="group-num">Group 3</div>
+      <div class="group-name">The Care Advocates</div>
+      <div class="group-focus">Health, Access & Inclusion — clinical integration, neurodivergence, cognitive accessibility</div>
+      <div class="group-members">
+        <div class="group-member"><span class="member-name">Valerie Tan</span><span class="member-paper">MR Body Doubling for ADHD</span></div>
+        <div class="group-member"><span class="member-name">Jose Ferrer Costa</span><span class="member-paper">XR in Routine Primary Care</span></div>
+        <div class="group-member"><span class="member-name">Constance Bault</span><span class="member-paper">AR Wayfinding — Intellectual Disability</span></div>
+      </div>
+    </div>
+
+    <div class="group-card g4">
+      <div class="group-num">Group 4</div>
+      <div class="group-name">The Cultural Sentinels</div>
+      <div class="group-focus">Memory, Identity & Ethics — psychological safety, cultural heritage, intimate AI, memory distortion</div>
+      <div class="group-members">
+        <div class="group-member"><span class="member-name">Imane Chafi</span><span class="member-paper">EthnoAR: Cultural Heritage</span></div>
+        <div class="group-member"><span class="member-name">Léana Petiot</span><span class="member-paper">Blurring Virtual/Real & Memory</span></div>
+        <div class="group-member"><span class="member-name">Mats Ole Ellenberg</span><span class="member-paper">BacteriaZoom</span></div>
+        <div class="group-member"><span class="member-name">Sophia Bertoni</span><span class="member-paper">Dating a Robot?</span></div>
+        <div class="group-member"><span class="member-name">I.G.M. Darmawiguna</span><span class="member-paper">When Temples Travel</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── PERSONAS ─── -->
+<section class="section" id="personas" style="padding-top:0">
+  <div class="section-header">
+    <span class="section-tag">Appendix C</span>
+    <h2 class="section-title">Persona Cards</h2>
+  </div>
+  <div class="personas">
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">A</div>
+      <div class="persona-label">Persona A</div>
+      <div class="persona-name">The Student</div>
+      <p class="persona-desc">Has ADHD, uses MR for biology labs, and lives in a shared dormitory. Navigates focus, memory, and shared physical-virtual spaces daily.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Attention</span>
+        <span class="challenge-tag">Shared Spaces</span>
+        <span class="challenge-tag">Memory</span>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">B</div>
+      <div class="persona-label">Persona B</div>
+      <div class="persona-name">The Patient</div>
+      <p class="persona-desc">Manages chronic pain via XR, navigates the city with intellectual disability support, and lives with a robot companion. Every system touches their safety.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Dependency</span>
+        <span class="challenge-tag">Privacy</span>
+        <span class="challenge-tag">Safety</span>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">C</div>
+      <div class="persona-label">Persona C</div>
+      <div class="persona-name">The Hybrid Professional</div>
+      <p class="persona-desc">Works in a museum with virtual artifacts, uses a smart-home to automate life, and plays MR board games socially. Lives at the seam of all realities.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Reality-Blurring</span>
+        <span class="challenge-tag">Culture</span>
+        <span class="challenge-tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">D</div>
+      <div class="persona-label">Persona D</div>
+      <div class="persona-name">The Remote Caregiver</div>
+      <p class="persona-desc">Mid-40s professional caring for an aging parent in another city. Uses XR telepresence to "be" in the parent's home and AR overlays to monitor medication and falls. The boundary between their own living space and the care infrastructure dissolves imperceptibly.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Telepresence</span>
+        <span class="challenge-tag">Care Burden</span>
+        <span class="challenge-tag">Boundaries</span>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">E</div>
+      <div class="persona-label">Persona E</div>
+      <div class="persona-name">The Teenager</div>
+      <p class="persona-desc">17-year-old who has grown up with XR as ambient infrastructure — school in mixed reality, social life split between physical gatherings and persistent virtual worlds. Their avatar identity has diverged from their physical self. Parents cannot enter the spaces they actually inhabit.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Identity</span>
+        <span class="challenge-tag">Adolescence</span>
+        <span class="challenge-tag">Oversight</span>
+      </div>
+    </div>
+
+    <div class="persona-card">
+      <div class="persona-bg-letter">F</div>
+      <div class="persona-label">Persona F</div>
+      <div class="persona-name">The Cultural Migrant</div>
+      <p class="persona-desc">Relocated abroad for work. Maintains connection to their homeland through culturally-rich XR environments — a virtual reconstruction of their hometown market, family gatherings in a shared virtual living room, digitised sacred spaces. Confronts whether a reproduced sacred site, divorced from its physical ground, retains its meaning.</p>
+      <div class="persona-challenges">
+        <span class="challenge-tag">Heritage</span>
+        <span class="challenge-tag">Displacement</span>
+        <span class="challenge-tag">Memory</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── GOLDEN RULE ─── -->
+<div class="golden-rule-section" id="golden-rule">
+  <div style="text-align:center">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:12px">Appendix B — The Golden Rule Template</div>
+    <div style="font-family:'Outfit',sans-serif;font-size:13px;color:var(--text-faint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0">To be placed on tables for Phase 1</div>
+  </div>
+  <div class="golden-rule-template">
+    "To prevent <span class="bracket">[SPECIFIC RISK]</span>, any Co-Living system must <span class="bracket">[SPECIFIC ACTION]</span>, even if it means <span class="bracket">[SACRIFICE / TRADE-OFF]</span>."
+  </div>
+  <p class="golden-rule-example">
+    e.g. "To prevent memory distortion, any Co-Living system must clearly signal transitions between physical and virtual states, even if it means breaking immersion."
+  </p>
+</div>
+
+<!-- ─── ORGANIZER ROLES ─── -->
+<section class="section" id="roles" style="padding-top:80px">
+  <div class="section-header">
+    <span class="section-tag">On the Day</span>
+    <h2 class="section-title">Organizer Roles</h2>
+  </div>
+
+  <style>
+    .roles-timeline { display: flex; flex-direction: column; gap: 2px; }
+    .role-block { background: var(--bg2); border-left: 3px solid var(--border); display: grid; grid-template-columns: 180px 1fr; transition: border-color 0.3s; }
+    .role-block:hover { border-left-color: rgba(200,168,106,0.3); }
+    .role-time-col { padding: 20px 20px; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: flex-start; gap: 4px; }
+    .role-time { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gold); }
+    .role-segment { font-size: 12px; color: var(--text-faint); font-style: italic; line-height: 1.3; }
+    .role-assignments { padding: 16px 24px; display: flex; flex-direction: column; gap: 8px; }
+    .role-row { display: flex; align-items: baseline; gap: 14px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .role-row:last-child { border-bottom: none; }
+    .role-person { font-size: 13px; font-weight: 500; color: var(--text); min-width: 160px; flex-shrink: 0; }
+    .role-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+    .role-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 2px 7px; margin-right: 8px; border: 1px solid; white-space: nowrap; flex-shrink: 0; }
+    .tag-lead { color: var(--gold); border-color: rgba(200,168,106,0.4); }
+    .tag-support { color: var(--blue); border-color: rgba(110,198,245,0.3); }
+    .tag-float { color: var(--g4); border-color: rgba(155,127,232,0.3); }
+    .tag-tech { color: var(--g1); border-color: rgba(92,212,196,0.3); }
+    .tag-doc { color: var(--g3); border-color: rgba(224,107,138,0.3); }
+  </style>
+
+  <div class="roles-timeline">
+
+    <!-- Welcome -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">14:15 – 14:27</span>
+        <span class="role-segment">Welcome &amp; Avatar Demo</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Alex</span>
+          <span class="role-tag tag-lead">Lead</span>
+          <span class="role-desc">Opens the room, welcomes participants, introduces the concept and Georgios. Operates the Meta Quest, manages the projector stream.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Georgios</span>
+          <span class="role-tag tag-lead">Remote</span>
+          <span class="role-desc">Joins as avatar. Delivers the welcome and frames the day's goal: "What you just experienced is the question we are here to answer."</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightning Round -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">14:27 – 15:27</span>
+        <span class="role-segment">Lightning Round</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Michael</span>
+          <span class="role-tag tag-lead">MC / Timer</span>
+          <span class="role-desc">Strict timekeeper and MC. Manages the countdown, keeps energy high, cuts off politely at 3 minutes. Sets the tone that this is fast-paced and focused.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Roger</span>
+          <span class="role-tag tag-support">Moderator</span>
+          <span class="role-desc">Moderates the session, keeps the question framing clear, briefly introduces each presenter.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Kris</span>
+          <span class="role-tag tag-doc">Documentation</span>
+          <span class="role-desc">Takes photos and notes throughout. Sets up the Poster Wall (paper title cards ready for the break).</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Katerina, Art</span>
+          <span class="role-tag tag-support">Audience</span>
+          <span class="role-desc">Listen actively. Note connections and tensions across papers — useful for seeding conversation during the break and Phase 1 group dynamics.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Group Assembly -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">15:21 – 15:45</span>
+        <span class="role-segment">Group Assembly</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Alex</span>
+          <span class="role-tag tag-lead">Group coordinator</span>
+          <span class="role-desc">Reveals the 4 group assignments, directs each participant to their table, and hands out the group brief card. Sets the expectation: use the break to get acquainted, arrive at Part II ready to draft.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Michael</span>
+          <span class="role-tag tag-support">Timer</span>
+          <span class="role-desc">Signals the start and end of the assembly window, keeping the transition to break on schedule.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">All facilitators</span>
+          <span class="role-tag tag-float">At group tables</span>
+          <span class="role-desc">Each facilitator goes directly to their assigned group table to welcome members and prompt the first shared observation.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Break -->
+    <div class="role-block" style="border-left-color: rgba(110,198,245,0.2)">
+      <div class="role-time-col">
+        <span class="role-time">15:45 – 16:30</span>
+        <span class="role-segment">Coffee Break + Poster Walk</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Kris</span>
+          <span class="role-tag tag-lead">Poster Wall Host</span>
+          <span class="role-desc">Stands at the Poster Wall, hands out sticky notes, explains the task to participants who approach. Keeps the wall tidy.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Art</span>
+          <span class="role-tag tag-support">Poster Wall Support</span>
+          <span class="role-desc">Assists at the wall. Helps participants articulate connections between papers.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">All others</span>
+          <span class="role-tag tag-float">Mingle</span>
+          <span class="role-desc">Circulate freely among participants. Identify who has strong opinions — useful for Phase 1 group dynamics.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">16:30 – 17:05</span>
+        <span class="role-segment">Phase 1 — Expert Workstreams</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Michael</span>
+          <span class="role-tag tag-lead">Group 1 — Threshold Engineers</span>
+          <span class="role-desc">Facilitates the perception &amp; transitions group. Keeps discussion focused on the Golden Rule template.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Kris</span>
+          <span class="role-tag tag-lead">Group 2 — Habitat Weavers</span>
+          <span class="role-desc">Facilitates the space &amp; everyday integration group.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Roger</span>
+          <span class="role-tag tag-lead">Group 3 — Care Advocates</span>
+          <span class="role-desc">Facilitates the health &amp; inclusion group. His clinical psychology background makes him the natural fit here.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Katerina</span>
+          <span class="role-tag tag-lead">Group 4 — Cultural Sentinels</span>
+          <span class="role-desc">Facilitates the memory, identity &amp; ethics group. Her HCI and cultural heritage background is ideal for this group's topics.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Art</span>
+          <span class="role-tag tag-float">Roving challenger</span>
+          <span class="role-desc">Floats across all groups. Challenges their rules with hard questions, helps them push beyond the obvious. Also writes final Golden Rules on the large posters.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Georgios</span>
+          <span class="role-tag tag-float">Remote observer</span>
+          <span class="role-desc">Available on a laptop screen — groups can consult him. Monitors overall energy remotely.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Golden Rule Showcase -->
+    <div class="role-block" style="border-left-color:rgba(200,168,106,0.35)">
+      <div class="role-time-col">
+        <span class="role-time">17:05 – 17:09</span>
+        <span class="role-segment">Golden Rule Showcase</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Alex</span>
+          <span class="role-tag tag-lead">Showcase host</span>
+          <span class="role-desc">Calls each of the 4 groups up in turn — 1 minute per group to present their 2 Golden Rules to the full room. Keeps strict timing.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">17:09 – 17:45</span>
+        <span class="role-segment">Phase 2 — Persona Stress Test</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Michael</span>
+          <span class="role-tag tag-lead">Jigsaw coordinator</span>
+          <span class="role-desc">Manages the swap, directs participants to their mixed group tables, then briefs all groups: explains how to use the Golden Rules produced in Phase 1 as the framework for stress-testing their assigned persona through the 24-hour map.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Roger</span>
+          <span class="role-tag tag-lead">Mixed Group A</span>
+          <span class="role-desc">Facilitates the full 24-hour stress test. Each group covers all 4 dimensions: clinical safety, embodied experience, rule contradictions, and technical feasibility.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Katerina</span>
+          <span class="role-tag tag-lead">Mixed Group B</span>
+          <span class="role-desc">Facilitates the full stress test across all 4 dimensions.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Art</span>
+          <span class="role-tag tag-lead">Mixed Group C</span>
+          <span class="role-desc">Facilitates the full stress test across all 4 dimensions.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Alex</span>
+          <span class="role-tag tag-lead">Mixed Group D</span>
+          <span class="role-desc">Facilitates the full stress test across all 4 dimensions.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Kris</span>
+          <span class="role-tag tag-float">Floats all tables</span>
+          <span class="role-desc">Visits each group, helps articulate the Conflict Point, keeps energy up across the room.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Michael</span>
+          <span class="role-tag tag-doc">Timer</span>
+          <span class="role-desc">Manages the countdown, gives a 5-minute warning before the end.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="role-block">
+      <div class="role-time-col">
+        <span class="role-time">17:45 – 18:00</span>
+        <span class="role-segment">Phase 3 — Manifesto Reveal</span>
+      </div>
+      <div class="role-assignments">
+        <div class="role-row">
+          <span class="role-person">Katerina</span>
+          <span class="role-tag tag-lead">MC + Synthesis</span>
+          <span class="role-desc">Calls each group to present (1 min each), then delivers the closing synthesis — ties the 4 Conflict Points together into a research agenda and frames the day's output.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Georgios</span>
+          <span class="role-tag tag-lead">Closing words (remote)</span>
+          <span class="role-desc">Returns as avatar for the final farewell — bookends the opening demo. Invites everyone to the Slack group and next steps.</span>
+        </div>
+        <div class="role-row">
+          <span class="role-person">Kris</span>
+          <span class="role-tag tag-doc">Final photo</span>
+          <span class="role-desc">Takes the group photo with the 8 Golden Rules and 4 Persona Maps visible on the wall behind participants.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>CHI 2026 Workshop — Co-Living: Reality ↔ Virtuality</p>
+  <p>Draft v2 · March 2026 · The Co-Living VR/XR Organizers</p>
+</footer>
+
+</body>
+</html>
