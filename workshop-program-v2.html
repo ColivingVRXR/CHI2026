@@ -761,14 +761,85 @@
     border-bottom: 1px solid var(--border);
   }
 
+  .golden-rule-lead {
+    max-width: 860px;
+    margin: 18px auto 0;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  .golden-rule-core {
+    margin: 18px auto 0;
+    max-width: 760px;
+    padding: 14px 18px;
+    border: 1px solid rgba(200,168,106,0.18);
+    background: var(--gold-glow);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  .golden-rule-core strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .golden-rule-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 30px;
+  }
+
+  .golden-rule-card {
+    padding: 24px 24px 22px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-top: 2px solid rgba(200,168,106,0.35);
+  }
+
+  .golden-rule-card.ethical {
+    border-top-color: rgba(110,198,245,0.35);
+  }
+
+  .golden-rule-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .golden-rule-card.ethical .golden-rule-kicker {
+    color: var(--blue);
+  }
+
+  .golden-rule-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .golden-rule-card p {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin-bottom: 14px;
+  }
+
   .golden-rule-template {
     font-family: 'Outfit', sans-serif;
     font-size: 18px;
     font-weight: 300;
-    line-height: 1.5;
-    color: var(--text-dim);
-    margin: 28px 0 0;
-    text-align: center;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 18px 0 0;
   }
 
   .golden-rule-template .bracket {
@@ -776,16 +847,55 @@
     font-style: italic;
   }
 
+  .golden-rule-card.ethical .golden-rule-template .bracket {
+    color: var(--blue);
+  }
+
+  .golden-rule-mini {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  .golden-rule-examples {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
   .golden-rule-example {
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border);
     font-family: 'Outfit', sans-serif;
-    font-style: italic;
-    font-size: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  .golden-rule-example strong {
+    display: block;
+    margin-bottom: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .golden-rule-note {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.65;
     color: var(--text-faint);
     text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
   }
 
   /* ─── FOOTER ─── */
@@ -894,6 +1004,14 @@
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     color: var(--text-faint);
+  }
+
+
+  @media (max-width: 900px) {
+    .golden-rule-grid,
+    .golden-rule-examples {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </head>
@@ -1068,7 +1186,7 @@
       <div class="phase-name">Drafting the Golden Rules</div>
       <div class="phase-desc">Groups were formed at the end of Part I and have already met during the break. Participants return to their tables and dive straight into distilling their collective research into 2 Universal Guidelines.</div>
       <div class="phase-task">
-        <strong>Task:</strong> Write two "Golden Rules" for Co-Living — one <strong>Technical</strong> (how to build it) and one <strong>Ethical</strong> (how to protect the user). Use the Golden Rule Template.
+        <strong>Task:</strong> Write two "Golden Rules" for Co-Living — one <strong>Technical</strong> and one <strong>Ethical</strong>. Both must address the <strong>same daily routine context</strong> and the <strong>same core tension</strong>, but from different angles. Use the Golden Rule Templates.
       </div>
       <div class="phase-constraints">
         <div class="constraint">Output written on a large poster</div>
@@ -1294,14 +1412,64 @@
 <!-- ─── GOLDEN RULE ─── -->
 <div class="golden-rule-section" id="golden-rule">
   <div style="text-align:center">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:12px">Appendix B — The Golden Rule Template</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--text-faint);text-transform:uppercase;margin-bottom:12px">Appendix B — The Golden Rule Templates</div>
     <div style="font-family:'Outfit',sans-serif;font-size:13px;color:var(--text-faint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0">To be placed on tables for Phase 1</div>
   </div>
-  <div class="golden-rule-template">
-    "To prevent <span class="bracket">[SPECIFIC RISK]</span>, any Co-Living system must <span class="bracket">[SPECIFIC ACTION]</span>, even if it means <span class="bracket">[SACRIFICE / TRADE-OFF]</span>."
+
+  <p class="golden-rule-lead">
+    Each team must write <strong>two</strong> Golden Rules for the <strong>same everyday XR situation</strong>: one <strong>Technical Rule</strong> about how the system should work, and one <strong>Ethical Rule</strong> about what the system must protect or limit.
+  </p>
+  <div class="golden-rule-core">
+    Start by naming the team's core tension: <strong>"between _____ and _____."</strong><br>
+    Then write both rules from that same tension so they <strong>support each other</strong> — the friction should appear later, when different teams' rules meet in the persona exercise.
   </div>
-  <p class="golden-rule-example">
-    e.g. "To prevent memory distortion, any Co-Living system must clearly signal transitions between physical and virtual states, even if it means breaking immersion."
+
+  <div class="golden-rule-grid">
+    <div class="golden-rule-card">
+      <div class="golden-rule-kicker">Template A</div>
+      <h3>Technical Rule</h3>
+      <p>Focus on what the system must do to make the situation workable in practice.</p>
+      <div class="golden-rule-template">
+        “To make <span class="bracket">[DAILY ROUTINE CONTEXT]</span> workable, any Co-Living system must <span class="bracket">[DESIGN REQUIREMENT]</span>, even if it means <span class="bracket">[PERFORMANCE / IMMERSION / CONVENIENCE TRADE-OFF]</span>.”
+      </div>
+      <div class="golden-rule-mini">Design level · concrete enough to guide implementation · not code-level</div>
+    </div>
+
+    <div class="golden-rule-card ethical">
+      <div class="golden-rule-kicker">Template B</div>
+      <h3>Ethical Rule</h3>
+      <p>Focus on what the system must protect, reveal, or constrain in that same situation.</p>
+      <div class="golden-rule-template">
+        “To protect <span class="bracket">[PERSON / VALUE / RIGHT]</span> in <span class="bracket">[SAME DAILY ROUTINE CONTEXT]</span>, any Co-Living system must <span class="bracket">[SAFEGUARD OR LIMIT]</span>, even if it means <span class="bracket">[EFFICIENCY / PERSONALIZATION / SEAMLESSNESS TRADE-OFF]</span>.”
+      </div>
+      <div class="golden-rule-mini">Human protection level · concrete enough to shape design · not abstract values only</div>
+    </div>
+  </div>
+
+  <div class="golden-rule-examples">
+    <div class="golden-rule-example">
+      <strong>Example pair · Threshold Engineers</strong>
+      <em>Technical:</em> “To make cross-reality transitions in collaborative AR workable, any Co-Living system must preserve stable timing and cue coherence, even if it means slower or more explicit switching.”<br>
+      <em>Ethical:</em> “To protect users from disorientation during those same transitions, any Co-Living system must keep reality shifts legible, even if it weakens perfect seamlessness.”
+    </div>
+    <div class="golden-rule-example">
+      <strong>Example pair · Care Advocates</strong>
+      <em>Technical:</em> “To make XR support workable in routine care, any Co-Living system must reduce onboarding and interaction friction, even if it means simpler interfaces.”<br>
+      <em>Ethical:</em> “To protect patients from overload in that same care context, any Co-Living system must keep guidance adjustable to the user’s capacity and routine, even if it makes the system less standardized.”
+    </div>
+    <div class="golden-rule-example">
+      <strong>Example pair · Cultural Sentinels</strong>
+      <em>Technical:</em> “To make cultural XR experiences workable across contexts, any Co-Living system must preserve framing and provenance, even if it limits portability.”<br>
+      <em>Ethical:</em> “To protect users from invisible memory or identity shaping in that same context, any Co-Living system must make mediation and influence visible, even if it reduces immersion.”
+    </div>
+    <div class="golden-rule-example">
+      <strong>Reminder</strong>
+      Do not try to merge everything from every paper. Choose <em>one shared concern</em> or <em>one shared design principle</em> that appears in more than one paper from your team, and build the pair from there.
+    </div>
+  </div>
+
+  <p class="golden-rule-note">
+    Good pairs are clear, arguable, and slightly uncomfortable: they should make sense within your team, but create tension when applied to another team’s persona.
   </p>
 </div>
 
